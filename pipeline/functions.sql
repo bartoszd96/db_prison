@@ -7,8 +7,8 @@ BEGIN
 	WHERE w.id_celi = NEW.id_celi 
 	AND w.id_placowki = NEW.id_placowki AND w.data_wyjscia IS NULL;
 	
-	SELECT p.pojemnosc INTO pojemnosc FROM pomieszcznia p 
-	WHERE p.typ_sali = 'cela' AND p.id_sali = NEW.id_sali 
+	SELECT p.pojemnosc_celi INTO pojemnosc FROM pomieszcznia p 
+	WHERE p.typ_sali = 'cela' AND p.id_sali = NEW.id_celi 
 	AND p.id_placowki = NEW.id_placowki;
 	
 	IF (ile IS NULL) OR (pojemnosc IS NULL) THEN
