@@ -32,15 +32,16 @@ CREATE TABLE PRZESTEPSTWA (
 
 CREATE TABLE WIEZNIOWIE (
  id_wieznia INTEGER PRIMARY KEY,
- imie VARCHAR(20) NOT NULL,
- nazwisko VARCHAR(20) NOT NULL,
- pseudonim VARCHAR(20),
- wykroczenie VARCHAR(30) NOT NULL REFERENCES PRZESTEPSTWA(wykroczenie),
+ imie VARCHAR(50) NOT NULL,
+ nazwisko VARCHAR(50) NOT NULL,
+ pseudonim VARCHAR(50),
+ wykroczenie VARCHAR(50) NOT NULL REFERENCES PRZESTEPSTWA(wykroczenie),
  data_przybycia DATE NOT NULL,
  wyrok INTEGER NOT NULL CHECK (wyrok > 0),
- gang VARCHAR(20),
+ gang VARCHAR(50),
  id_celi INTEGER REFERENCES POMIESZCZENIA(id_sali),
  id_stolowki INTEGER REFERENCES POMIESZCZENIA(id_sali),
+ id_placowki INTEGER REFERENCES PLACOWKI(id_placowki),
  data_wyjscia DATE CHECK (data_wyjscia > data_przybycia),
  adres_zdjecia VARCHAR(20) UNIQUE
 );
