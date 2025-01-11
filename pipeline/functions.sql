@@ -4,12 +4,10 @@ DECLARE
 	pojemnosc INTEGER;
 BEGIN
 	SELECT count(*) INTO ile FROM wiezniowie w
-	WHERE w.id_celi = NEW.id_celi 
-	AND w.id_placowki = NEW.id_placowki AND w.data_wyjscia IS NULL;
+	WHERE w.id_celi = NEW.id_celi AND w.data_wyjscia IS NULL;
 	
-	SELECT p.pojemnosc_celi INTO pojemnosc FROM pomieszczenia p 
-	WHERE p.typ_sali = 'cela' AND p.id_sali = NEW.id_celi 
-	AND p.id_placowki = NEW.id_placowki;
+	SELECT p.pojemnosc_celi INTO pojemnosc FROM cele p 
+	WHERE p.id_celi = NEW.id_celi;
 	
 	IF (ile IS NULL) OR (pojemnosc IS NULL) THEN
 		RAISE EXCEPTION 'Sprawdz czy dane wejsciowe są poprawne.';
