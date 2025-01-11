@@ -62,7 +62,6 @@ CREATE TABLE WIEZNIOWIE (
  gang VARCHAR(50),
  id_celi INTEGER REFERENCES CELE(id_celi),
  id_stolowki INTEGER REFERENCES STOLOWKI(id_stolowki),
- id_placowki INTEGER REFERENCES PLACOWKI(id_placowki),
  data_wyjscia DATE CHECK (data_wyjscia > data_przybycia),
  adres_zdjecia VARCHAR(20) UNIQUE
 );
