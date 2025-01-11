@@ -47,7 +47,7 @@ BEGIN
 END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE OR REPLACE FUNCTION TRANSFER_WIEZNIA(id_w INTEGER, placowka_in INTEGER, cela_in INTEGER, placowka_out INTEGER, cela_out INTEGER) RETURNS VOID AS $$
+CREATE OR REPLACE FUNCTION TRANSFER_WIEZNIA(id_w INTEGER, cela_in INTEGER, cela_out INTEGER) RETURNS VOID AS $$
 DECLARE
 	transferowany INTEGER;
 	ile_out INTEGER;
@@ -55,25 +55,24 @@ DECLARE
 BEGIN
 	
 	SELECT count(*) INTO transferowany FROM wiezniowie w 
-	WHERE w.id_wieznia = id_w AND w.id_placowki = placowka_in AND w.id_celi = cela_in;
+	WHERE w.id_wieznia = id_w AND w.id_celi = cela_in;
 	
 	SELECT count(*) INTO ile_out FROM wiezniowie w
 	WHERE w.id_celi = cela_out 
-	AND w.id_placowki = placowka_out AND w.data_wyjscia IS NULL;
+	AND w.data_wyjscia IS NULL;
 	
-	SELECT p.pojemnosc_celi INTO pojemnosc_out FROM pomieszczenia p 
-	WHERE p.typ_sali = 'cela' AND p.id_sali = cela_out 
-	AND p.id_placowki = placowka_out;
+	SELECT p.pojemnosc_celi INTO pojemnosc_out FROM cele p 
+	WHERE p.typ_sali = 'cela' AND p.id_sali = cela_out ;
 	
 	IF (ile_out IS NULL) OR (pojemnosc_out IS NULL) THEN
-		RAISE EXCEPTION 'Niepoprawne dane, upewnij się czy więzień jest w danej placówce i celi, oraz że cela do której chcesz go przenieść istnieje i ma wolne miejsce';
+		RAISE EXCEPTION 'Niepoprawne dane, upewnij się czy więzień jest w danej celi, oraz że cela do której chcesz go przenieść istnieje i ma wolne miejsce';
 	END IF;
 	
 	IF (transferowany = 1) AND (pojemnosc_out > ile_out) THEN 
-		INSERT INTO TRANSFERY(id_placowki_in, id_placowki_out, id_celi_in, id_celi_out, id_wieznia) 
-		VALUES (placowka_in, placowka_out, cela_in, cela_out, id_w);
+		INSERT INTO TRANSFERY(id_celi_in, id_celi_out, id_wieznia) 
+		VALUES (ela_in, cela_out, id_w);
 		
-		UPDATE wiezniowie SET id_placowki = placowka_out, id_celi = cela_out 
+		UPDATE wiezniowie SET  id_celi = cela_out 
 		WHERE id_wieznia = id_w;
 		
 	ELSE 
