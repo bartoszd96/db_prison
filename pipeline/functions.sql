@@ -113,5 +113,40 @@ INSERT INTO STOLOWKI(id_stolowki, id_placowki, pojemnosc_stolowki)
 END;
 $$ LANGUAGE 'plpgsql';
 
-//przetestowac
+
+CREATE OR REPLACE FUNCTION WYSWIETL_OBECNYCH_WIEZNIOW(id_placowki_z INTEGER) RETURNS TABLE AS $$
+BEGIN
+RETURN
+	SELECT *
+	FROM wiezniowie w
+	WHERE w.id_placowki=id_placowki_z AND w.data_wyjscia IS NOT NULL;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION WYSWIETL_BYŁYCH_WIEZNIOW(id_placowki_z INTEGER) RETURNS TABLE AS $$
+BEGIN
+RETURN
+	SELECT *
+	FROM wiezniowie w
+	WHERE w.id_placowki=id_placowki_z AND w.data_wyjscia IS NULL;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION WYSWIETL_STRAZNIKOW(id_placowki_z INTEGER) RETURNS TABLE AS $$
+BEGIN
+RETURN
+	SELECT *
+	FROM straznicy
+	WHERE w.id_placowki=id_placowki_z;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION WYSWIETL_PRACOWNIKOW(id_placowki_z INTEGER) RETURNS TABLE AS $$
+BEGIN
+RETURN
+	SELECT *
+	FROM pozostali_pracownicy
+	WHERE w.id_placowki=id_placowki_z;
+END;
+$$ LANGUAGE 'plpgsql';
 
