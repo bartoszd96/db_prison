@@ -1,7 +1,7 @@
 CREATE VIEW wydatki AS
 SELECT 
     id_transakcji, 
-    kwota, 
+    k.cena_produktu*kwota, 
     data_transakcji, 
     f.id_odbiorcy, 
     'kontrahent' AS rodzaj_odbiorcy, 
@@ -14,7 +14,7 @@ UNION
 
 SELECT 
     id_transakcji, 
-    kwota, 
+    p.wyplata AS kwota, 
     data_transakcji, 
     f.id_odbiorcy, 
     'pracownik administracyjny' AS rodzaj_odbiorcy, 
@@ -27,7 +27,7 @@ UNION
 
 SELECT 
     id_transakcji, 
-    kwota, 
+   s.wyplata AS kwota, 
     data_transakcji, 
     f.id_odbiorcy, 
     'straznik' AS rodzaj_odbiorcy, 
