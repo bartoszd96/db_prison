@@ -60,6 +60,9 @@ INSERT INTO STRAZNICY (imie, nazwisko, id_placowki, wyplata) VALUES
 INSERT INTO PRZESTEPSTWA (wykroczenie, stopien_zagrozenia) VALUES
 ('Kradziez', 2), ('Napad', 3), ('Zabojstwo', 5), ('Handel narkotykami', 4), ('Przekret finansowy', 3), ('Podpalenie', 4), ('Pobicie', 3), ('Falszerstwo', 3), ('Morderstwo', 5), ('Dzielenie przez 0', 1),  ('Zaklocanie porzadku', 1);
 
+-- Insert into STOLOWKI (2 cafeterias)
+INSERT INTO STOLOWKI (id_placowki, pojemnosc_stolowki) VALUES
+(1, 50), (2, 40);
 
 -- Insert into WIEZNIOWIE (20 prisoners)
 INSERT INTO WIEZNIOWIE (imie, nazwisko, pseudonim, id_przestepstwa, data_przybycia, wyrok, gang, id_celi, id_stolowki, adres_zdjecia) VALUES
@@ -113,12 +116,6 @@ INSERT INTO WIEZNIOWIE (imie, nazwisko, pseudonim, id_przestepstwa, data_przybyc
 ('Dariusz', 'Kowalski', 'Jastrzab', 5, '2023-02-28', 7, 'Orly', 20, 1, 'dariusz_kowalski.jpg'),
 ('Marek', 'Zielinski', 'Wilk', 6, '2022-09-20', 10, 'Wilki', 20, 1, 'marek_zielinski_2.jpg'),
 ('Daniel', 'Adamski', NULL, 9, '2021-10-22', 8, NULL, 20, 1, 'daniel_adamski.jpg');
-
-
-
--- Insert into STOLOWKI (2 cafeterias)
-INSERT INTO STOLOWKI (id_placowki, pojemnosc_stolowki) VALUES
-(1, 50), (2, 40);
 
 -- Insert into MAGAZYNY (3 storage rooms)
 INSERT INTO MAGAZYNY (id_placowki, pojemnosc_magazynu) VALUES
