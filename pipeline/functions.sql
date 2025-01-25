@@ -46,6 +46,7 @@ DECLARE
     dokupic_1 INTEGER;
     dokupic_2 INTEGER;
     id_odbiorcy INTEGER;
+cena INTEGER;
 BEGIN
 
     SELECT COALESCE(z.zapotrzebowanie_jednostkowe - z.obecny_stan, 0)
@@ -60,6 +61,9 @@ BEGIN
     JOIN magazyny m ON z.id_sali=m.id_magazynu
     WHERE z.id_produktu = id AND m.id_placowki=2;
 
+        SELECT p.cena_produktu INTO cena 
+	FROM produkty p
+	WHERE p.id_produktu = id;
 
     IF dokupic_1 > 0 THEN
         SELECT o.id_odbiorcy
@@ -68,9 +72,12 @@ BEGIN
         JOIN odbiorcy o ON k.id_odbiorcy = o.id_odbiorcy
         WHERE k.id_produktu = id;
 
+UPDATE TABLE zaopatrzenie z SET z.obecny_stan=z.zapotrzebowanie_jednostkowe
+	WHERE z.id.produktu=id;
+
         IF id_odbiorcy IS NOT NULL THEN
             INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy)
-            VALUES (dokupic_1 * (SELECT cena_produktu FROM zaopatrzenie WHERE id_produktu = id), CURRENT_DATE, id_odbiorcy);
+            VALUES (dokupic_1 *cena , CURRENT_DATE, id_odbiorcy);
         END IF;
     END IF;
 
@@ -81,10 +88,12 @@ IF dokupic_2 > 0 THEN
         JOIN odbiorcy o ON k.id_odbiorcy = o.id_odbiorcy
         WHERE k.id_produktu = id
         LIMIT 1;
+UPDATE TABLE zaopatrzenie z SET z.obecny_stan=z.zapotrzebowanie_jednostkowe
+	WHERE z.id.produktu=id;
 
         IF id_odbiorcy IS NOT NULL THEN
             INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy)
-            VALUES (dokupic_2 * (SELECT cena_produktu FROM zaopatrzenie WHERE id_produktu = id LIMIT 1), CURRENT_DATE, id_odbiorcy);
+            VALUES (dokupic_2 * cena, CURRENT_DATE, id_odbiorcy);
         END IF;
     END IF;
 END;
