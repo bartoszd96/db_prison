@@ -124,6 +124,8 @@ INSERT INTO STOLOWKI (id_placowki, pojemnosc_stolowki) VALUES
 INSERT INTO MAGAZYNY (id_placowki, pojemnosc_magazynu) VALUES
 (1, 100), (2, 120), (1, 90);
 
+INSERT INTO PRODUKTY(typ_produktu) VALUES 
+('Jedzenie'), ('Ubrania'), ('Artykuly higieniczne'), ('Napoje'), ('Środki bezpieczeństwa');
 
 -- Insert into FINANSE (3 existing transactions + 5 new ones)
 INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy) VALUES
