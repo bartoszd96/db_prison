@@ -69,4 +69,4 @@ WHERE c.id_placowki = 2;
 
 CREATE OR REPLACE VIEW zmiany_braki AS
 SELECT a.id_placowki, a.id_sektor, a.id_zmiany, 'Brak strażnika na zmianie' as Braki FROM (SELECT * FROM sektory s CROSS JOIN (SELECT 1 AS id_zmiany UNION ALL SELECT 2 UNION ALL SELECT 3)) a LEFT OUTER JOIN 
-zmiany b ON a.id_sektor = b.id_sektor WHERE ( (b.id_zmiany IS NULL) OR (b.id_straznika IS NULL) );
+zmiany b ON a.id_sektor = b.id_sektor and a.id_zmiany = b.id_zmiany where (b.id_zmiany is null) or (b.id_straznika is null);
