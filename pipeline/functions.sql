@@ -66,12 +66,11 @@ BEGIN
         INTO id_odbiorcy
         FROM kontrahenci k
         JOIN odbiorcy o ON k.id_odbiorcy = o.id_odbiorcy
-        WHERE k.id_produktu = id
-        LIMIT 1;
+        WHERE k.id_produktu = id;
 
         IF id_odbiorcy IS NOT NULL THEN
             INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy)
-            VALUES (dokupic_1 * (SELECT cena_produktu FROM zaopatrzenie WHERE id_produktu = id LIMIT 1), CURRENT_DATE, id_odbiorcy);
+            VALUES (dokupic_1 * (SELECT cena_produktu FROM zaopatrzenie WHERE id_produktu = id), CURRENT_DATE, id_odbiorcy);
         END IF;
     END IF;
 
