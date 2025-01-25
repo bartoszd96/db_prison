@@ -1,82 +1,59 @@
 INSERT INTO placowki(nazwa, miasto, ulica, nr_budynku, longitude, latitude) VALUES 
-('Zakład karny nr 1 we Wrocławiu', 'Wrocław', 'Kleczkowska', 35, 51.127434, 17.0269411),
-('Zakład karny w Wołowie', 'Wołów', 'Więzienna', 6,  51.2581917, 16.5629008);
+('Zaklad karny nr 1 we Wroclawiu', 'Wroclaw', 'Kleczkowska', 35, 51.127434, 17.0269411),
+('Zaklad karny w Wolowie', 'Wolow', 'Wiezienna', 6,  51.2581917, 16.5629008);
 
-INSERT INTO straznicy(id_placowki, wyplata, imie, nazwisko) VALUES
-(1, 7500, 'Jan', 'Kowalski'),
-(1, 5000, 'Anna', 'Nowak'),
-(1, 6000, 'Piotr', 'Wiśniewski'),
-(1, 5000, 'Katarzyna', 'Kamińska'),
-(1, 5500, 'Marek', 'Zieliński'),
-(1, 5000, 'Agnieszka', 'Szymańska'),
-(2, 5000, 'Tomasz', 'Wójcik'),
-(2, 4500, 'Ewa', 'Kowalczyk'),
-(2, 5000, 'Michał', 'Piotrowski'),
-(2, 5500, 'Joanna', 'Król'),
-(2, 7000, 'Łukasz', 'Mazur'),
-(2, 6000, 'Magdalena', 'Pawlak');
 
-INSERT INTO sektory(id_placowki, id_sektor) VALUES
-(1, 1), (1, 2), (1, 3), (1, 4), (2, 5), (2,6), (2, 7), (2, 8);
+-- Insert into SEKTORY (5 sectors per facility)
+INSERT INTO SEKTORY (id_placowki, id_sektor) VALUES
+(1, 101), (1, 102), (1, 103), (1, 104), (1, 105),
+(2, 201), (2, 202), (2, 203), (2, 204), (2, 205);
 
-INSERT INTO cele(id_placowki, id_sektor, pojemnosc_celi) VALUES 
-(1, 1, 6), (1, 1, 6), (1, 1, 6), (1, 2, 4), (1, 2, 4), (1, 2, 4);
+-- Insert into CELE (5 cells per facility, 2-4 prisoners per cell)
+INSERT INTO CELE (id_sektor, id_placowki, pojemnosc_celi) VALUES
+(101, 1, 4), (102, 1, 4), (103, 1, 4), (104, 1, 4), (105, 1, 4),
+(201, 2, 4), (202, 2, 4), (203, 2, 4), (204, 2, 4), (205, 2, 4);
 
-INSERT INTO PRZESTEPSTWA (wykroczenie, stopien_zagrozenia)
-VALUES 
-    ('Kradzież', 2),
-    ('Podpalenie', 4),
-    ('Napad', 5),
-    ('Włamanie', 3),
-    ('Oszustwa podatkowe', 1),
-    ('Pobicie', 3),
-    ('Fałszerstwo', 3),
-    ('Przemyt', 4),
-    ('Morderstwo', 5),
-    ('Dzielenie przez 0', 1),
-    ('Zakłócanie porządku', 1);
-	
-INSERT INTO WIEZNIOWIE (id_wieznia, imie, nazwisko, pseudonim, wykroczenie, data_przybycia, wyrok, gang, id_celi, id_stolowki, id_placowki, data_wyjscia, adres_zdjecia)
-VALUES
-    (1, 'Jan', 'Kowalski', 'Janek Spryciarz', 'Kradzież', '2024-01-01', 2, 'Gang Kieszonkowców', 1, 1, 1, NULL, 'zdjecie1.jpg'),
-    (2, 'Adam', 'Nowak', 'Podpalacz', 'Podpalenie', '2024-02-15', 5, 'Gang Płomienia', 1, 1, 1, NULL, 'zdjecie2.jpg'),
-    (3, 'Paweł', 'Wiśniewski', 'Napadator', 'Napad', '2024-03-10', 7, 'Napadacze', 1, 1, 1, NULL, 'zdjecie3.jpg'),
-    (4, 'Karol', 'Zieliński', 'Włamywacz', 'Włamanie', '2024-04-20', 4, 'Gang Złodziei', 1, 1, 1, NULL, 'zdjecie4.jpg'),
-    (5, 'Michał', 'Wójcik', 'Fałszerz', 'Fałszerstwo', '2024-05-25', 3, 'Fałszerze Profesjonalni', 1, 1, 1, NULL, 'zdjecie5.jpg'),
-    (6, 'Tomasz', 'Kamiński', 'Przemytnik', 'Przemyt', '2024-06-30', 6, 'Gang Przemytników', 1, 1, 1, NULL, 'zdjecie6.jpg');
-    (7, 'Piotr', 'Lewandowski', 'Chemik', 'Morderstwo', '2024-07-15', 8, 'Pospolity gang', 1, 1, 1, NULL, 'zdjecie7.jpg'),
-    (8, 'Anna', 'Wiśniewska', 'Królowa Fałszerzy', 'Fałszerstwo', '2024-08-01', 3, 'Fałszerze Profesjonalni', 1, 1, 1, NULL, 'zdjecie8.jpg'),
-    (9, 'Katarzyna', 'Zając', 'Podpalaczka', 'Podpalenie', '2024-09-10', 5, 'Gang Płomienia', 1, 1, 1, NULL, 'zdjecie9.jpg'),
-    (10, 'Grzegorz', 'Mazur', NULL, 'Zakłócanie porządku', '2024-10-05', 1, NULL, 1, 1, 1, NULL, 'zdjecie10.jpg'),
-    (11, 'Marcin', 'Dąbrowski', 'Matematyk', 'Dzielenie przez 0', '2024-11-15', 1, 'Gang Paradoksu', 1, 1, 1, NULL, 'zdjecie11.jpg'),
-    (12, 'Dominik', 'Kowalczyk', 'Włamywacz Junior', 'Włamanie', '2024-12-20', 4, 'Gang Złodziei', 1, 1, 1, NULL, 'zdjecie12.jpg'),
-    (13, 'Agnieszka', 'Pawlak', 'Przemytniczka', 'Przemyt', '2025-01-03', 6, 'Gang Przemytników', 1, 1, 1, NULL, 'zdjecie13.jpg'),
-    (14, 'Łukasz', 'Sokołowski', 'Napadnik', 'Napad', '2025-01-15', 7, 'Napadacze', 1, 1, 1, NULL, 'zdjecie14.jpg'),
-    (15, 'Joanna', 'Czarnecka', 'Oszuściara', 'Oszustwa podatkowe', '2025-02-10', 1, 'Gang Finansiści', 1, 1, 1, NULL, 'zdjecie15.jpg'),
-    (16, 'Barbara', 'Krawczyk', NULL, 'Kradzież', '2025-03-05', 2, NULL, 1, 1, 1, NULL, 'zdjecie16.jpg'),
-    (17, 'Krzysztof', 'Piotrowski', 'Piroman', 'Podpalenie', '2025-04-10', 5, 'Gang Płomienia', 1, 1, 1, NULL, 'zdjecie17.jpg'),
-    (18, 'Sylwia', 'Włodarczyk', 'Fałszerka', 'Fałszerstwo', '2025-05-15', 3, 'Fałszerze Profesjonalni', 1, 1, 1, NULL, 'zdjecie18.jpg'),
-    (19, 'Marek', 'Król', 'Napadacz', 'Napad', '2025-06-20', 7, 'Napadacze', 1, 1, 1, NULL, 'zdjecie19.jpg'),
-    (20, 'Ewelina', 'Szymańska', 'Przemytniczka', 'Przemyt', '2025-07-25', 6, 'Gang Przemytników', 1, 1, 1, NULL, 'zdjecie20.jpg'),
-    (21, 'Patryk', 'Głowacki', 'Matematyk Chaosu', 'Dzielenie przez 0', '2025-08-30', 1, 'Gang Paradoksu', 1, 1, 1, NULL, 'zdjecie21.jpg'),
-    (22, 'Rafał', 'Chmielewski', 'Zakłócacz Ciszy', 'Zakłócanie porządku', '2025-09-15', 1, 'Gang Hałasu', 1, 1, 1, NULL, 'zdjecie22.jpg'),
-    (23, 'Beata', 'Jabłońska', 'Włamywaczka', 'Włamanie', '2025-10-10', 4, 'Gang Złodziei', 1, 1, 1, NULL, 'zdjecie23.jpg'),
-    (24, 'Wojciech', 'Lis', 'Mistrz Fałszerstw', 'Fałszerstwo', '2025-11-20', 3, 'Fałszerze Profesjonalni', 1, 1, 1, NULL, 'zdjecie24.jpg'),
-    (25, 'Natalia', 'Nowicka', 'Podpalaczka Pro', 'Podpalenie', '2025-12-25', 5, 'Gang Płomienia', 1, 1, 1, NULL, 'zdjecie25.jpg');
-	
--- TEST triggera dodaj wieznia
-	
-INSERT INTO WIEZNIOWIE (id_wieznia, imie, nazwisko, pseudonim, wykroczenie, data_przybycia, wyrok, gang, id_celi, id_stolowki, id_placowki, data_wyjscia, adres_zdjecia)
-VALUES
-	 (26, 'Krzysztof', 'Lewandowski', 'Zakłócacz', 'Zakłócanie porządku', '2024-07-15', 1, 'Gang Hałasowników', 1, 1, 1, NULL, 'zdjecie7.jpg');
-	
--- TEST triggera dodaj cele
+-- Insert into PRZESTEPSTWA (Crimes)
+INSERT INTO PRZESTEPSTWA (wykroczenie, stopien_zagrozenia) VALUES
+('Kradziez', 2), ('Napad', 3), ('Zabojstwo', 5), ('Handel narkotykami', 4), ('Przekret finansowy', 3), ('Podpalenie', 4), ('Pobicie', 3), ('Falszerstwo', 3), ('Morderstwo', 5), ('Dzielenie przez 0', 1),  ('Zaklocanie porzadku', 1);
 
-INSERT INTO pomieszczenia(id_placowki, typ_sali, pojemnosc_magazynu, pojemnosc_celi, id_straznika_1, id_straznika_2, id_straznika_3) VALUES 
-(1, 'cela', NULL, 6, 7, 8, 9);
 
--- TEST transfer_wieznia
+-- Insert into WIEZNIOWIE (20 prisoners)
+INSERT INTO WIEZNIOWIE (id_wieznia, imie, nazwisko, pseudonim, id_przestepstwa, data_przybycia, wyrok, gang, id_celi, id_stolowki, adres_zdjecia) VALUES
+(1, 'Jan', 'Kowalski', 'Rekin', 2, '2023-05-10', 7, 'Bracia', 101, 1, 'jan_k.jpg'),
+(2, 'Piotr', 'Nowak', 'Lis', 3, '2022-06-20', 15, 'Wilki', 101, 1, 'piotr_n.jpg'),
+(3, 'Andrzej', 'Wisniewski', 'Tygrys', 1, '2021-03-15', 5, 'Bracia', 102, 1, 'andrzej_w.jpg'),
+(4, 'Kamil', 'Lewandowski', NULL, 4, '2020-12-01', 10, NULL, 102, 1, 'kamil_l.jpg'),
+(5, 'Tomasz', 'Dabrowski', 'Smok', 3, '2019-07-14', 20, 'Smoki', 103, 2, 'tomasz_d.jpg'),
+(6, 'Robert', 'Zielinski', NULL, 5, '2021-02-28', 8, NULL, 103, 2, 'robert_z.jpg'),
+(7, 'Marek', 'Szymanski', 'Sowa', 1, '2020-09-19', 4, 'Wilki', 104, 2, 'marek_s.jpg'),
+(8, 'Adam', 'Wojcik', NULL, 8, '2022-04-10', 12, NULL, 104, 2, 'adam_w.jpg'),
+(9, 'Lukasz', 'Mazur', 'Wilk', 5, '2018-10-25', 25, 'Bracia', 105, 1, 'lukasz_m.jpg'),
+(10, 'Pawel', 'Krawczyk', NULL, 4, '2019-01-11', 18, NULL, 105, 1, 'pawel_k.jpg'),
+(11, 'Mateusz', 'Piotrowski', NULL, 1, '2023-08-15', 6, NULL, 201, 2, 'mateusz_p.jpg'),
+(12, 'Grzegorz', 'Nowicki', 'Czapla', 2, '2022-10-12', 9, 'Bracia', 201, 2, 'grzegorz_n.jpg'),
+(13, 'Jakub', 'Pawlak', NULL, 3, '2021-06-20', 14, NULL, 202, 1, 'jakub_p.jpg'),
+(14, 'Michal', 'Zajac', 'Dzik', 5, '2020-05-17', 11, 'Wilki', 202, 1, 'michal_z.jpg'),
+(15, 'Marcin', 'Krol', NULL, 4, '2019-12-22', 17, NULL, 203, 2, 'marcin_k.jpg'),
+(16, 'Szymon', 'Wieczorek', NULL, 2, '2023-03-30', 7, NULL, 203, 2, 'szymon_w.jpg'),
+(17, 'Bartosz', 'Jablonski', 'Orzel', 10, '2021-07-29', 5, 'Bracia', 204, 1, 'bartosz_j.jpg'),
+(18, 'Wojciech', 'Wrobel', NULL, 9, '2020-11-02', 16, NULL, 204, 1, 'wojciech_w.jpg'),
+(19, 'Dariusz', 'Wlodarczyk', 'Niedzwiedz', 5, '2018-08-14', 30, 'Wilki', 205, 2, 'dariusz_w.jpg'),
+(20, 'Filip', 'Kot', NULL, 4, '2019-09-09', 20, NULL, 205, 2, 'filip_k.jpg');
 
-select transfer_wieznia(1, 1, 1, 2, 1); -- powinno nie przejsc
+-- Insert into STRAZNICY (5 guards)
+INSERT INTO STRAZNICY (id_odbiorcy, imie, nazwisko, id_placowki, wyplata) VALUES
+(1, 'Karol', 'Majewski', 1, 5000),
+(2, 'Damian', 'Stepien', 1, 5500),
+(3, 'Rafal', 'Dudek', 2, 5200),
+(4, 'Mariusz', 'Czerwinski', 2, 5300),
+(5, 'Krzysztof', 'Baran', 1, 5100);
 
-select transfer_wieznia(1, 1, 1, 2, 2); -- powinno przejsc
+-- Insert into STOLOWKI (2 cafeterias)
+INSERT INTO STOLOWKI (id_placowki, pojemnosc_stolowki) VALUES
+(1, 50), (2, 40);
+
+-- Insert into MAGAZYNY (3 storage rooms)
+INSERT INTO MAGAZYNY (id_placowki, pojemnosc_magazynu) VALUES
+(1, 100), (2, 120), (1, 90);
+
