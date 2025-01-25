@@ -36,20 +36,36 @@ SELECT
 FROM STRAZNICY s
 JOIN FINANSE f ON f.id_odbiorcy = s.id_odbiorcy;
 
-
-
-
-CREATE VIEW stan_cele AS
+CREATE VIEW stan_cele_1 AS
 SELECT 
     c.id_celi, 
-    COUNT(w.id_wieznia) OVER (PARTITION BY c.id_celi) * 1.0 / c.pojemnosc_celi AS zapelnienie_celi,
-	z.id_straznika AS pilnujacy_straznik,
+    -- Window function to calculate the cell's occupation rate per cell
+    COUNT(w.id_wieznia) OVER (PARTITION BY c.id_celi) AS zapelnienie_celi,
+    c.pojemnosc_celi,
+    z.id_straznika AS pilnujacy_straznik,
     w.id_wieznia, 
     w.imie, 
     w.nazwisko
 FROM cele c
 LEFT JOIN wiezniowie w ON c.id_celi = w.id_celi
-JOIN zmiany z ON z.id_sektor=c.id_sektor;
+LEFT JOIN zmiany z ON z.id_sektor = c.id_sektor
+WHERE c.id_placowki = 1;
+
+CREATE VIEW stan_cele_2 AS
+SELECT 
+    c.id_celi, 
+    -- Window function to calculate the cell's occupation rate per cell
+    COUNT(w.id_wieznia) OVER (PARTITION BY c.id_celi) AS zapelnienie_celi,
+    c.pojemnosc_celi,
+    z.id_straznika AS pilnujacy_straznik,
+    w.id_wieznia, 
+    w.imie, 
+    w.nazwisko
+FROM cele c
+LEFT JOIN wiezniowie w ON c.id_celi = w.id_celi
+LEFT JOIN zmiany z ON z.id_sektor = c.id_sektor
+WHERE c.id_placowki = 2;
+
 
 CREATE OR REPLACE VIEW zmiany_braki AS
 SELECT a.id_placowki, a.id_sektor, a.id_zmiany, 'Brak strażnika na zmianie' as Braki FROM (SELECT * FROM sektory s CROSS JOIN (SELECT 1 AS id_zmiany UNION ALL SELECT 2 UNION ALL SELECT 3)) a LEFT OUTER JOIN 
