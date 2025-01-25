@@ -152,6 +152,47 @@ INSERT INTO POZOSTALI_PRACOWNICY (imie, nazwisko, wyplata, id_placowki, stanowis
 
 
 INSERT INTO ZMIANY (id_zmiany, id_sektor, id_straznika) VALUES
-(1, 103, 1),
-(2, 105, 5),
-(1, 201, 3);
+-- Sektor 101 (Placówka 1)
+(1, 101, 1),
+(2, 101, 2),
+
+-- Sektor 102 (Placówka 1)
+(1, 102, 3),
+(2, 102, 4),
+(3, 102, 5),
+
+-- Sektor 103 (Placówka 1)
+(1, 103, 6),
+(2, 103, 7),
+
+-- Sektor 104 (Placówka 1)
+(1, 104, 8),
+(2, 104, 9),
+
+-- Sektor 105 (Placówka 1)
+(1, 105, 10),
+(2, 105, 11),
+
+-- Sektor 201 (Placówka 2)
+(1, 201, 18),
+(2, 201, 19),
+(3, 201, 20),
+
+-- Sektor 202 (Placówka 2)
+(1, 202, 21),
+(2, 202, 22),
+
+-- Sektor 203 (Placówka 2)
+(1, 203, 23),
+(2, 203, 24),
+(3, 203, 25),
+
+-- Sektor 204 (Placówka 2)
+(1, 204, 26),
+(2, 204, 27),
+
+-- Sektor 205 (Placówka 2)
+(1, 205, 28),
+(2, 205, 29),
+(3, 205, 30);
+
