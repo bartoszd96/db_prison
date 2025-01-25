@@ -21,17 +21,39 @@ INSERT INTO CELE (id_sektor, id_placowki, pojemnosc_celi) VALUES
 (205, 2, 6), (205, 2, 4), (205, 2, 5);
 
 -- Insert into STRAZNICY (5 existing guards + 5 new ones)
-INSERT INTO STRAZNICY (id_odbiorcy, imie, nazwisko, id_placowki, wyplata) VALUES
-(1, 'Karol', 'Majewski', 1, 5000),
-(2, 'Damian', 'Stepien', 1, 5500),
-(3, 'Rafal', 'Dudek', 2, 5200),
-(4, 'Mariusz', 'Czerwinski', 2, 5300),
-(5, 'Krzysztof', 'Baran', 1, 5100),
-(6, 'Tomasz', 'Wilczek', 1, 5200),
-(7, 'Grzegorz', 'Lisowski', 2, 5400),
-(8, 'Sebastian', 'Nowosielski', 1, 5300),
-(9, 'Pawel', 'Jastrzebski', 2, 5500),
-(10, 'Marek', 'Ostrowski', 1, 5100);
+INSERT INTO STRAZNICY (imie, nazwisko, id_placowki, wyplata) VALUES
+-- Placówka 1
+('Karol', 'Majewski', 1, 5000),
+('Damian', 'Stepien', 1, 5500),
+('Krzysztof', 'Baran', 1, 5100),
+('Tomasz', 'Wilczek', 1, 5200),
+('Sebastian', 'Nowosielski', 1, 5300),
+('Marek', 'Ostrowski', 1, 5100),
+('Adam', 'Nowak', 1, 5000),
+('Piotr', 'Lis', 1, 5500),
+('Daniel', 'Wojcik', 1, 5200),
+('Lukasz', 'Zielinski', 1, 5400),
+('Maciej', 'Borkowski', 1, 5300),
+('Mateusz', 'Kaczmarek', 1, 5100),
+('Jakub', 'Adamski', 1, 5200),
+('Michal', 'Sobczak', 1, 5400),
+('Patryk', 'Michalski', 1, 5500),
+-- Placówka 2
+('Rafal', 'Dudek', 2, 5200),
+('Mariusz', 'Czerwinski', 2, 5300),
+('Grzegorz', 'Lisowski', 2, 5400),
+('Pawel', 'Jastrzebski', 2, 5500),
+('Jakub', 'Szymanski', 2, 5100),
+('Bartek', 'Wroblewski', 2, 5200),
+('Tadeusz', 'Nowacki', 2, 5300),
+('Filip', 'Kowalski', 2, 5400),
+('Kamil', 'Gorski', 2, 5000),
+('Andrzej', 'Lewandowski', 2, 5100),
+('Szymon', 'Pietrzak', 2, 5200),
+('Oskar', 'Bielawski', 2, 5300),
+('Wiktor', 'Zawadzki', 2, 5500),
+('Dominik', 'Kot', 2, 5400),
+('Igor', 'Zielonka', 2, 5200);
 
 
 -- Insert into PRZESTEPSTWA (Crimes)
