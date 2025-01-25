@@ -87,13 +87,11 @@ INSERT INTO WIEZNIOWIE (imie, nazwisko, pseudonim, id_przestepstwa, data_przybyc
 ('Lukasz', 'Mazur', 'Rekin', 5, '2022-11-20', 8, 'Wilki', 3, 1, 'lukasz_mazur.jpg'),
 ('Tadeusz', 'Wroblewski', NULL, 8, '2023-03-30', 14, NULL, 3, 1, 'tadeusz_wroblewski.jpg'),
 
--- Cela 5 (pojemność 6, zapełniona)
+-- Cela 5 (pojemność 4, zapełniona)
 ('Jan', 'Wojcik', 'Lis', 4, '2023-02-10', 12, 'Wilki', 5, 1, 'jan_wojcik.jpg'),
 ('Maciej', 'Wisniewski', NULL, 5, '2022-08-22', 8, NULL, 5, 1, 'maciej_wisniewski.jpg'),
 ('Tomasz', 'Adamski', 'Orzel', 6, '2021-05-18', 10, 'Orly', 5, 1, 'tomasz_adamski.jpg'),
 ('Wojciech', 'Zajac', 'Dzik', 7, '2022-07-15', 6, 'Wilki', 5, 1, 'wojciech_zajac.jpg'),
-('Sebastian', 'Mazur', NULL, 8, '2023-03-20', 7, NULL, 5, 1, 'sebastian_mazur_2.jpg'),
-('Kamil', 'Nowak', 'Tygrys', 9, '2021-06-30', 15, 'Tygrysy', 5, 1, 'kamil_nowak.jpg'),
 
 -- Cela 6 (pojemność 4, zapełniona)
 ('Bartlomiej', 'Kot', 'Rekin', 10, '2023-01-05', 18, 'Rekiny', 6, 1, 'bartlomiej_kot.jpg'),
