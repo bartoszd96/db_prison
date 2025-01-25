@@ -51,13 +51,13 @@ BEGIN
     SELECT COALESCE(zapotrzebowanie_jednostkowe - obecny_stan, 0)
     INTO dokupic_1
     FROM zaopatrzenie z
-    JOIN magazyny m ON z.id_sali=m.id_magazynu;
+    JOIN magazyny m ON z.id_sali=m.id_magazynu
     WHERE z.id_produktu = id AND m.id_placowki=1;
 
  SELECT COALESCE(zapotrzebowanie_jednostkowe - obecny_stan, 0)
     INTO dokupic_2
     FROM zaopatrzenie z
-    JOIN magazyny m ON z.id_sali=m.id_magazynu;
+    JOIN magazyny m ON z.id_sali=m.id_magazynu
     WHERE z.id_produktu = id AND m.id_placowki=2;
 
 
