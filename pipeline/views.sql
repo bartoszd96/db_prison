@@ -50,3 +50,7 @@ SELECT
 FROM cele c
 LEFT JOIN wiezniowie w ON c.id_celi = w.id_celi
 JOIN zmiany z ON z.id_sektor=c.id_sektor;
+
+CREATE OR REPLACE VIEW zmiany_braki AS
+SELECT a.id_placowki, a.id_sektor, a.id_zmiany, 'Brak strażnika na zmianie' as Braki FROM (SELECT * FROM sektory s CROSS JOIN (SELECT 1 AS id_zmiany UNION ALL SELECT 2 UNION ALL SELECT 3)) a LEFT OUTER JOIN 
+zmiany b ON a.id_sektor = b.id_sektor WHERE ( (b.id_zmiany IS NULL) OR (b.id_straznika IS NULL) );
