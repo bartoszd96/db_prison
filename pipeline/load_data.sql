@@ -127,6 +127,13 @@ INSERT INTO MAGAZYNY (id_placowki, pojemnosc_magazynu) VALUES
 INSERT INTO PRODUKTY(typ_produktu) VALUES 
 ('Jedzenie'), ('Ubrania'), ('Artykuly higieniczne'), ('Napoje'), ('Środki bezpieczeństwa');
 
+INSERT INTO ZAOPATRZENIE(id_produktu, id_sali, zapotrzebowanie_jednostkowe, obecny_stan) VALUES
+  (1, 1, 50, 20),
+  (1, 2, 50, 13),
+  (2, 2, 50, 23);
+
+CREATE TABLE KONTRAHENCI(nazwa, id_produktu, cena_produktu) VALUES
+  (Nestle, 1, 20);
 -- Insert into FINANSE (3 existing transactions + 5 new ones)
 INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy) VALUES
 (5000, '2024-01-15', 1),
