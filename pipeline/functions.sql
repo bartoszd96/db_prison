@@ -62,8 +62,8 @@ BEGIN
         LIMIT 1;
 
         IF id_odbiorcy IS NOT NULL THEN
-            INSERT INTO FINANSE (ilosc, koszt, data, id_odbiorcy)
-            VALUES (dokupic, dokupic * (SELECT cena_produktu FROM zaopatrzenie WHERE id_produktu = id LIMIT 1), CURRENT_DATE, id_odbiorcy);
+            INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy)
+            VALUES (, dokupic * (SELECT cena_produktu FROM zaopatrzenie WHERE id_produktu = id LIMIT 1), CURRENT_DATE, id_odbiorcy);
         END IF;
     END IF;
 END;
