@@ -40,30 +40,6 @@ BEGIN
 END
 $$ LANGUAGE 'plpgsql';
 
-CREATE OR REPLACE FUNCTION DODAJ_CELE() RETURNS TRIGGER AS $$
-DECLARE 
-	Z1 INTEGER;
-	Z2 INTEGER;
-	Z3 INTEGER;
-BEGIN
-	
-	SELECT s.zmiana INTO Z1 FROM straznicy s 
-	WHERE s.id_straznika = NEW.id_straznika_1 and s.id_placowki = NEW.id_placowki;
-	
-	SELECT s.zmiana INTO Z2 FROM straznicy s 
-	WHERE s.id_straznika = NEW.id_straznika_2 and s.id_placowki = NEW.id_placowki;
-	
-	SELECT s.zmiana INTO Z3 FROM straznicy s 
-	WHERE s.id_straznika = NEW.id_straznika_3 and s.id_placowki = NEW.id_placowki;
-	
-	IF (Z1 = 1) AND (Z2 = 2) AND (Z3 = 3) THEN 
-		RETURN NEW;
-	ELSE 
-		RAISE EXCEPTION 'Blad w danych, albo ktorys straznik nie istnieje, albo probowano przypisac do go zlej zmiany';
-	END IF;
-END;
-$$ LANGUAGE 'plpgsql';
-
 CREATE OR REPLACE FUNCTION TRANSFER_WIEZNIA(id_w INTEGER, cela_in INTEGER, cela_out INTEGER) RETURNS VOID AS $$
 DECLARE
 	transferowany INTEGER;
