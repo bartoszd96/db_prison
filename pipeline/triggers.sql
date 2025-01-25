@@ -8,8 +8,17 @@ BEFORE INSERT ON pomieszczenia
 FOR EACH ROW
 EXECUTE FUNCTION DODAJ_CELE();
 
-CREATE TRIGGER dodaj_id_odbiorcy
-BEFORE INSERT ON kontrahent OR straznicy OR pozostali pracownicy
+CREATE TRIGGER dodaj_id_kontrahent
+BEFORE INSERT ON kontrahent
 FOR EACH ROW
 EXECUTE FUNCTION DODAJ();
 
+CREATE TRIGGER dodaj_id_straznik
+BEFORE INSERT ON straznicy
+FOR EACH ROW
+EXECUTE FUNCTION DODAJ();
+
+CREATE TRIGGER dodaj_id_pracownik
+BEFORE INSERT ON pozostali_pracownicy
+FOR EACH ROW
+EXECUTE FUNCTION DODAJ();
