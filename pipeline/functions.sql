@@ -62,8 +62,8 @@ BEGIN
 	END IF;
 	
 	IF (transferowany = 1) AND (pojemnosc_out > ile_out) THEN 
-		INSERT INTO TRANSFERY(id_celi_in, id_celi_out, id_wieznia) 
-		VALUES (cela_in, cela_out, id_w);
+		INSERT INTO TRANSFERY(id_celi_in, id_celi_out, id_wieznia, data_transferu) 
+		VALUES (cela_in, cela_out, id_w, '2025-01-25');
 		
 		UPDATE wiezniowie SET  id_celi = cela_out 
 		WHERE id_wieznia = id_w;
