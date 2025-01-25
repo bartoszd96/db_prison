@@ -63,56 +63,56 @@ INSERT INTO PRZESTEPSTWA (wykroczenie, stopien_zagrozenia) VALUES
 
 -- Insert into WIEZNIOWIE (20 prisoners)
 INSERT INTO WIEZNIOWIE (imie, nazwisko, pseudonim, id_przestepstwa, data_przybycia, wyrok, gang, id_celi, id_stolowki, adres_zdjecia) VALUES
--- Cela 31 (pojemność 4, zapełniona)
-('Piotr', 'Kowalski', 'Wilk', 1, '2022-05-01', 6, 'Wilki', 31, 1, 'piotr_kowalski.jpg'),
-('Adam', 'Nowak', 'Rekin', 2, '2021-07-15', 10, 'Rekiny', 31, 1, 'adam_nowak.jpg'),
-('Marek', 'Zielinski', 'Jastrzab', 3, '2020-03-11', 15, 'Orly', 31, 1, 'marek_zielinski.jpg'),
-('Tomasz', 'Lis', NULL, 4, '2023-01-25', 8, 'Hieny', 31, 1, 'tomasz_lis.jpg'),
+-- Cela 1 (pojemność 4, zapełniona)
+('Piotr', 'Kowalski', 'Wilk', 1, '2022-05-01', 6, 'Wilki', 1, 1, 'piotr_kowalski.jpg'),
+('Adam', 'Nowak', 'Rekin', 2, '2021-07-15', 10, 'Rekiny', 1, 1, 'adam_nowak.jpg'),
+('Marek', 'Zielinski', 'Jastrzab', 3, '2020-03-11', 15, 'Orly', 1, 1, 'marek_zielinski.jpg'),
+('Tomasz', 'Lis', NULL, 4, '2023-01-25', 8, 'Hieny', 1, 1, 'tomasz_lis.jpg'),
 
--- Cela 32 (pojemność 5, zapełniona)
-('Sebastian', 'Mazur', 'Tygrys', 6, '2023-03-20', 7, 'Wilki', 32, 1, 'sebastian_mazur.jpg'),
-('Grzegorz', 'Nowak', NULL, 8, '2022-04-15', 12, NULL, 32, 1, 'grzegorz_nowak.jpg'),
-('Karol', 'Krawczyk', 'Dzik', 5, '2021-02-10', 8, 'Hieny', 32, 1, 'karol_krawczyk.jpg'),
-('Artur', 'Kot', NULL, 7, '2022-05-11', 9, NULL, 32, 1, 'artur_kot.jpg'),
-('Jakub', 'Lis', 'Orzel', 9, '2020-08-15', 14, 'Wilki', 32, 1, 'jakub_lis.jpg'),
+-- Cela 2 (pojemność 5, zapełniona)
+('Sebastian', 'Mazur', 'Tygrys', 6, '2023-03-20', 7, 'Wilki', 2, 1, 'sebastian_mazur.jpg'),
+('Grzegorz', 'Nowak', NULL, 8, '2022-04-15', 12, NULL, 2, 1, 'grzegorz_nowak.jpg'),
+('Karol', 'Krawczyk', 'Dzik', 5, '2021-02-10', 8, 'Hieny', 2, 1, 'karol_krawczyk.jpg'),
+('Artur', 'Kot', NULL, 7, '2022-05-11', 9, NULL, 2, 1, 'artur_kot.jpg'),
+('Jakub', 'Lis', 'Orzel', 9, '2020-08-15', 14, 'Wilki', 2, 1, 'jakub_lis.jpg'),
 
--- Cela 33 (pojemność 6, zapełniona)
-('Andrzej', 'Adamski', 'Wilk', 10, '2023-06-10', 15, 'Rekiny', 33, 1, 'andrzej_adamski.jpg'),
-('Bartosz', 'Szymanski', NULL, 3, '2021-03-20', 7, NULL, 33, 1, 'bartosz_szymanski.jpg'),
-('Dominik', 'Bielawski', 'Jastrzab', 4, '2022-07-05', 10, 'Orly', 33, 1, 'dominik_bielawski.jpg'),
-('Patryk', 'Michalski', 'Sokol', 6, '2021-01-15', 12, 'Zubry', 33, 1, 'patryk_michalski.jpg'),
-('Lukasz', 'Mazur', 'Rekin', 5, '2022-11-20', 8, 'Wilki', 33, 1, 'lukasz_mazur.jpg'),
-('Tadeusz', 'Wroblewski', NULL, 8, '2023-03-30', 14, NULL, 33, 1, 'tadeusz_wroblewski.jpg'),
+-- Cela 3 (pojemność 6, zapełniona)
+('Andrzej', 'Adamski', 'Wilk', 10, '2023-06-10', 15, 'Rekiny', 3, 1, 'andrzej_adamski.jpg'),
+('Bartosz', 'Szymanski', NULL, 3, '2021-03-20', 7, NULL, 3, 1, 'bartosz_szymanski.jpg'),
+('Dominik', 'Bielawski', 'Jastrzab', 4, '2022-07-05', 10, 'Orly', 3, 1, 'dominik_bielawski.jpg'),
+('Patryk', 'Michalski', 'Sokol', 6, '2021-01-15', 12, 'Zubry', 3, 1, 'patryk_michalski.jpg'),
+('Lukasz', 'Mazur', 'Rekin', 5, '2022-11-20', 8, 'Wilki', 3, 1, 'lukasz_mazur.jpg'),
+('Tadeusz', 'Wroblewski', NULL, 8, '2023-03-30', 14, NULL, 3, 1, 'tadeusz_wroblewski.jpg'),
 
--- Cela 34 (pojemność 6, zapełniona)
-('Jan', 'Wojcik', 'Lis', 4, '2023-02-10', 12, 'Wilki', 34, 1, 'jan_wojcik.jpg'),
-('Maciej', 'Wisniewski', NULL, 5, '2022-08-22', 8, NULL, 34, 1, 'maciej_wisniewski.jpg'),
-('Tomasz', 'Adamski', 'Orzel', 6, '2021-05-18', 10, 'Orly', 34, 1, 'tomasz_adamski.jpg'),
-('Wojciech', 'Zajac', 'Dzik', 7, '2022-07-15', 6, 'Wilki', 34, 1, 'wojciech_zajac.jpg'),
-('Sebastian', 'Mazur', NULL, 8, '2023-03-20', 7, NULL, 34, 1, 'sebastian_mazur_2.jpg'),
-('Kamil', 'Nowak', 'Tygrys', 9, '2021-06-30', 15, 'Tygrysy', 34, 1, 'kamil_nowak.jpg'),
+-- Cela 5 (pojemność 6, zapełniona)
+('Jan', 'Wojcik', 'Lis', 4, '2023-02-10', 12, 'Wilki', 5, 1, 'jan_wojcik.jpg'),
+('Maciej', 'Wisniewski', NULL, 5, '2022-08-22', 8, NULL, 5, 1, 'maciej_wisniewski.jpg'),
+('Tomasz', 'Adamski', 'Orzel', 6, '2021-05-18', 10, 'Orly', 5, 1, 'tomasz_adamski.jpg'),
+('Wojciech', 'Zajac', 'Dzik', 7, '2022-07-15', 6, 'Wilki', 5, 1, 'wojciech_zajac.jpg'),
+('Sebastian', 'Mazur', NULL, 8, '2023-03-20', 7, NULL, 5, 1, 'sebastian_mazur_2.jpg'),
+('Kamil', 'Nowak', 'Tygrys', 9, '2021-06-30', 15, 'Tygrysy', 5, 1, 'kamil_nowak.jpg'),
 
--- Cela 35 (pojemność 4, zapełniona)
-('Bartlomiej', 'Kot', 'Rekin', 10, '2023-01-05', 18, 'Rekiny', 35, 1, 'bartlomiej_kot.jpg'),
-('Grzegorz', 'Lis', 'Wilk', 3, '2021-09-22', 11, 'Wilki', 35, 1, 'grzegorz_lis.jpg'),
-('Piotr', 'Mazur', NULL, 4, '2020-06-14', 10, NULL, 35, 1, 'piotr_mazur.jpg'),
-('Janusz', 'Adamski', 'Lis', 6, '2022-04-20', 8, 'Wilki', 35, 1, 'janusz_adamski.jpg'),
+-- Cela 6 (pojemność 4, zapełniona)
+('Bartlomiej', 'Kot', 'Rekin', 10, '2023-01-05', 18, 'Rekiny', 6, 1, 'bartlomiej_kot.jpg'),
+('Grzegorz', 'Lis', 'Wilk', 3, '2021-09-22', 11, 'Wilki', 6, 1, 'grzegorz_lis.jpg'),
+('Piotr', 'Mazur', NULL, 4, '2020-06-14', 10, NULL, 6, 1, 'piotr_mazur.jpg'),
+('Janusz', 'Adamski', 'Lis', 6, '2022-04-20', 8, 'Wilki', 6, 1, 'janusz_adamski.jpg'),
 
--- Cela 46 (pojemność 4, częściowo zapełniona)
-('Sebastian', 'Zajac', 'Dzik', 6, '2022-09-19', 9, 'Wilki', 46, 2, 'sebastian_zajac.jpg'),
-('Adrian', 'Szymanski', 'Wilk', 7, '2021-12-07', 11, 'Wilki', 46, 2, 'adrian_szymanski.jpg'),
+-- Cela 16 (pojemność 4, częściowo zapełniona)
+('Sebastian', 'Zajac', 'Dzik', 6, '2022-09-19', 9, 'Wilki', 16, 2, 'sebastian_zajac.jpg'),
+('Adrian', 'Szymanski', 'Wilk', 7, '2021-12-07', 11, 'Wilki', 16, 2, 'adrian_szymanski.jpg'),
 
--- Cela 49 (pojemność 5, zapełniona)
-('Grzegorz', 'Kot', 'Tygrys', 8, '2023-05-20', 13, 'Tygrysy', 49, 1, 'grzegorz_kot_2.jpg'),
-('Patryk', 'Pietrzak', NULL, 9, '2022-01-03', 16, NULL, 49, 1, 'patryk_pietrzak.jpg'),
-('Piotr', 'Michalski', 'Harpun', 10, '2021-06-22', 14, 'Rekiny', 49, 1, 'piotr_michalski.jpg'),
-('Jan', 'Bielawski', 'Wilk', 3, '2020-03-12', 12, 'Wilki', 49, 1, 'jan_bielawski.jpg'),
-('Bartosz', 'Nowak', NULL, 4, '2022-08-15', 7, NULL, 49, 1, 'bartosz_nowak.jpg'),
+-- Cela 19 (pojemność 5, zapełniona)
+('Grzegorz', 'Kot', 'Tygrys', 8, '2023-05-20', 13, 'Tygrysy', 19, 1, 'grzegorz_kot_2.jpg'),
+('Patryk', 'Pietrzak', NULL, 9, '2022-01-03', 16, NULL, 19, 1, 'patryk_pietrzak.jpg'),
+('Piotr', 'Michalski', 'Harpun', 10, '2021-06-22', 14, 'Rekiny', 19, 1, 'piotr_michalski.jpg'),
+('Jan', 'Bielawski', 'Wilk', 3, '2020-03-12', 12, 'Wilki', 19, 1, 'jan_bielawski.jpg'),
+('Bartosz', 'Nowak', NULL, 4, '2022-08-15', 7, NULL, 19, 1, 'bartosz_nowak.jpg'),
 
--- Cela 50 (pojemność 4, częściowo zapełniona)
-('Dariusz', 'Kowalski', 'Jastrzab', 5, '2023-02-28', 7, 'Orly', 50, 1, 'dariusz_kowalski.jpg'),
-('Marek', 'Zielinski', 'Wilk', 6, '2022-09-20', 10, 'Wilki', 50, 1, 'marek_zielinski_2.jpg'),
-('Daniel', 'Adamski', NULL, 9, '2021-10-22', 8, NULL, 50, 1, 'daniel_adamski.jpg');
+-- Cela 20 (pojemność 4, częściowo zapełniona)
+('Dariusz', 'Kowalski', 'Jastrzab', 5, '2023-02-28', 7, 'Orly', 20, 1, 'dariusz_kowalski.jpg'),
+('Marek', 'Zielinski', 'Wilk', 6, '2022-09-20', 10, 'Wilki', 20, 1, 'marek_zielinski_2.jpg'),
+('Daniel', 'Adamski', NULL, 9, '2021-10-22', 8, NULL, 20, 1, 'daniel_adamski.jpg');
 
 
 
