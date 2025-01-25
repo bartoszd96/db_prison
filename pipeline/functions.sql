@@ -40,6 +40,34 @@ BEGIN
 END
 $$ LANGUAGE 'plpgsql';
 
+
+CREATE OR REPLACE FUNCTION UZUPELNIJ(id INTEGER)
+RETURNS VOID AS $$
+DECLARE 
+    dokupic INTEGER;
+    id_odbiorcy INTEGER;
+BEGIN
+    SELECT zapotrzebowanie_jednostkowe - obecny_stan 
+    INTO dokupic
+    FROM zaopatrzenie
+    WHERE id_produktu = id;
+
+    IF dokupic > 0 THEN
+        SELECT o.id_odbiorcy 
+        INTO id_odbiorcy
+        FROM kontrahenci k
+        JOIN odbiorcy o ON k.id_odbiorcy = o.id_odbiorcy
+        WHERE k.id_produktu = id
+        LIMIT 1; 
+
+        INSERT INTO FINANSE (ilosc, koszt, data, id_odbiorcy)
+        SELECT dokupic, dokupic * cena_produktu, CURRENT_DATE, id_odbiorcy
+        FROM zaopatrzenie
+        WHERE id_produktu = id;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE FUNCTION TRANSFER_WIEZNIA(id_w INTEGER, cela_in INTEGER, cela_out INTEGER) RETURNS VOID AS $$
 DECLARE
 	transferowany INTEGER;
