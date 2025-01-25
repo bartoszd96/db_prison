@@ -8,10 +8,23 @@ INSERT INTO SEKTORY (id_placowki, id_sektor) VALUES
 (1, 101), (1, 102), (1, 103), (1, 104), (1, 105),
 (2, 201), (2, 202), (2, 203), (2, 204), (2, 205);
 
--- Insert into CELE (5 cells per facility, 2-4 prisoners per cell)
 INSERT INTO CELE (id_sektor, id_placowki, pojemnosc_celi) VALUES
 (101, 1, 4), (102, 1, 4), (103, 1, 4), (104, 1, 4), (105, 1, 4),
 (201, 2, 4), (202, 2, 4), (203, 2, 4), (204, 2, 4), (205, 2, 4);
+
+-- Insert into STRAZNICY (5 existing guards + 5 new ones)
+INSERT INTO STRAZNICY (id_odbiorcy, imie, nazwisko, id_placowki, wyplata) VALUES
+(1, 'Karol', 'Majewski', 1, 5000),
+(2, 'Damian', 'Stepien', 1, 5500),
+(3, 'Rafal', 'Dudek', 2, 5200),
+(4, 'Mariusz', 'Czerwinski', 2, 5300),
+(5, 'Krzysztof', 'Baran', 1, 5100),
+(6, 'Tomasz', 'Wilczek', 1, 5200),
+(7, 'Grzegorz', 'Lisowski', 2, 5400),
+(8, 'Sebastian', 'Nowosielski', 1, 5300),
+(9, 'Pawel', 'Jastrzebski', 2, 5500),
+(10, 'Marek', 'Ostrowski', 1, 5100);
+
 
 -- Insert into PRZESTEPSTWA (Crimes)
 INSERT INTO PRZESTEPSTWA (wykroczenie, stopien_zagrozenia) VALUES
@@ -20,7 +33,8 @@ INSERT INTO PRZESTEPSTWA (wykroczenie, stopien_zagrozenia) VALUES
 
 -- Insert into WIEZNIOWIE (20 prisoners)
 INSERT INTO WIEZNIOWIE (id_wieznia, imie, nazwisko, pseudonim, id_przestepstwa, data_przybycia, wyrok, gang, id_celi, id_stolowki, adres_zdjecia) VALUES
-(1, 'Jan', 'Kowalski', 'Rekin', 2, '2023-05-10', 7, 'Bracia', 101, 1, 'jan_k.jpg'),
+(1, 'Jan', 'Kowalski', 'Rekin', 2, '2023-05-10', 7, 'Bracia', 101, 1, 'C:\Users\koszm\OneDrive\Documents\ugh\bazki\zdjecie5.jpg') VALUES
+(1, 'Jan', 'Kowalski', 'Rekin', 2, '2023-05-10', 7, 'Bracia', 101, 1, 'zdjecie5.jpg''),
 (2, 'Piotr', 'Nowak', 'Lis', 3, '2022-06-20', 15, 'Wilki', 101, 1, 'piotr_n.jpg'),
 (3, 'Andrzej', 'Wisniewski', 'Tygrys', 1, '2021-03-15', 5, 'Bracia', 102, 1, 'andrzej_w.jpg'),
 (4, 'Kamil', 'Lewandowski', NULL, 4, '2020-12-01', 10, NULL, 102, 1, 'kamil_l.jpg'),
@@ -41,14 +55,6 @@ INSERT INTO WIEZNIOWIE (id_wieznia, imie, nazwisko, pseudonim, id_przestepstwa, 
 (19, 'Dariusz', 'Wlodarczyk', 'Niedzwiedz', 5, '2018-08-14', 30, 'Wilki', 205, 2, 'dariusz_w.jpg'),
 (20, 'Filip', 'Kot', NULL, 4, '2019-09-09', 20, NULL, 205, 2, 'filip_k.jpg');
 
--- Insert into STRAZNICY (5 guards)
-INSERT INTO STRAZNICY (id_odbiorcy, imie, nazwisko, id_placowki, wyplata) VALUES
-(1, 'Karol', 'Majewski', 1, 5000),
-(2, 'Damian', 'Stepien', 1, 5500),
-(3, 'Rafal', 'Dudek', 2, 5200),
-(4, 'Mariusz', 'Czerwinski', 2, 5300),
-(5, 'Krzysztof', 'Baran', 1, 5100);
-
 
 -- Insert into STOLOWKI (2 cafeterias)
 INSERT INTO STOLOWKI (id_placowki, pojemnosc_stolowki) VALUES
@@ -59,15 +65,29 @@ INSERT INTO MAGAZYNY (id_placowki, pojemnosc_magazynu) VALUES
 (1, 100), (2, 120), (1, 90);
 
 
--- Insert into FINANSE (Transactions)
+-- Insert into FINANSE (3 existing transactions + 5 new ones)
 INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy) VALUES
 (5000, '2024-01-15', 1),
 (3000, '2024-01-18', 2),
-(7000, '2024-01-20', 3);
+(7000, '2024-01-20', 3),
+(4500, '2024-02-05', 4),
+(6000, '2024-02-10', 5),
+(3200, '2024-02-12', 6),
+(4100, '2024-02-15', 7),
+(5300, '2024-02-20', 8);
 
--- Insert into POZOSTALI_PRACOWNICY (Other employees)
-INSERT INTO POZOSTALI_PRACOWNICY (id_odbiorcy, imie, nazwisko, wyplata, id_placowki, stanowisko) VALUES
-(6, 'Anna', 'Nowak', 4500, 1, 'Kucharz'),
-(7, 'Janusz', 'Kowalczyk', 4800, 2, 'Lekarz'),
-(8, 'Ewa', 'Lis', 4700, 1, 'Ksiegowa');
 
+INSERT INTO POZOSTALI_PRACOWNICY (imie, nazwisko, wyplata, id_placowki, stanowisko) VALUES
+('Anna', 'Nowak', 4500, 1, 'Kucharz'),
+('Janusz', 'Kowalczyk', 4800, 2, 'Lekarz'),
+('Ewa', 'Sikorska', 4600, 1, 'Psycholog'),
+('Mateusz', 'Dabrowski', 4700, 2, 'Opiekun'),
+('Barbara', 'Kaczmarek', 4900, 1, 'Administrator'),
+('Tadeusz', 'Nowosad', 5000, 2, 'Mechanik'),
+('Zofia', 'Pawlowska', 5100, 1, 'Ksiegowa');
+
+
+INSERT INTO ZMIANY (id_zmiany, id_sektor, id_straznika) VALUES
+(1, 103, 1),
+(2, 105, 5),
+(1, 201, 3);
