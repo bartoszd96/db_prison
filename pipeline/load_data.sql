@@ -62,27 +62,58 @@ INSERT INTO PRZESTEPSTWA (wykroczenie, stopien_zagrozenia) VALUES
 
 
 -- Insert into WIEZNIOWIE (20 prisoners)
-INSERT INTO WIEZNIOWIE (id_wieznia, imie, nazwisko, pseudonim, id_przestepstwa, data_przybycia, wyrok, gang, id_celi, id_stolowki, adres_zdjecia) VALUES
-(1, 'Jan', 'Kowalski', 'Rekin', 2, '2023-05-10', 7, 'Bracia', 101, 1, 'C:\Users\koszm\OneDrive\Documents\ugh\bazki\zdjecie5.jpg'),
-(2, 'Piotr', 'Nowak', 'Lis', 3, '2022-06-20', 15, 'Wilki', 101, 1, 'piotr_n.jpg'),
-(3, 'Andrzej', 'Wisniewski', 'Tygrys', 1, '2021-03-15', 5, 'Bracia', 102, 1, 'andrzej_w.jpg'),
-(4, 'Kamil', 'Lewandowski', NULL, 4, '2020-12-01', 10, NULL, 102, 1, 'kamil_l.jpg'),
-(5, 'Tomasz', 'Dabrowski', 'Smok', 3, '2019-07-14', 20, 'Smoki', 103, 2, 'tomasz_d.jpg'),
-(6, 'Robert', 'Zielinski', NULL, 5, '2021-02-28', 8, NULL, 103, 2, 'robert_z.jpg'),
-(7, 'Marek', 'Szymanski', 'Sowa', 1, '2020-09-19', 4, 'Wilki', 104, 2, 'marek_s.jpg'),
-(8, 'Adam', 'Wojcik', NULL, 8, '2022-04-10', 12, NULL, 104, 2, 'adam_w.jpg'),
-(9, 'Lukasz', 'Mazur', 'Wilk', 5, '2018-10-25', 25, 'Bracia', 105, 1, 'lukasz_m.jpg'),
-(10, 'Pawel', 'Krawczyk', NULL, 4, '2019-01-11', 18, NULL, 105, 1, 'pawel_k.jpg'),
-(11, 'Mateusz', 'Piotrowski', NULL, 1, '2023-08-15', 6, NULL, 201, 2, 'mateusz_p.jpg'),
-(12, 'Grzegorz', 'Nowicki', 'Czapla', 2, '2022-10-12', 9, 'Bracia', 201, 2, 'grzegorz_n.jpg'),
-(13, 'Jakub', 'Pawlak', NULL, 3, '2021-06-20', 14, NULL, 202, 1, 'jakub_p.jpg'),
-(14, 'Michal', 'Zajac', 'Dzik', 5, '2020-05-17', 11, 'Wilki', 202, 1, 'michal_z.jpg'),
-(15, 'Marcin', 'Krol', NULL, 4, '2019-12-22', 17, NULL, 203, 2, 'marcin_k.jpg'),
-(16, 'Szymon', 'Wieczorek', NULL, 2, '2023-03-30', 7, NULL, 203, 2, 'szymon_w.jpg'),
-(17, 'Bartosz', 'Jablonski', 'Orzel', 10, '2021-07-29', 5, 'Bracia', 204, 1, 'bartosz_j.jpg'),
-(18, 'Wojciech', 'Wrobel', NULL, 9, '2020-11-02', 16, NULL, 204, 1, 'wojciech_w.jpg'),
-(19, 'Dariusz', 'Wlodarczyk', 'Niedzwiedz', 5, '2018-08-14', 30, 'Wilki', 205, 2, 'dariusz_w.jpg'),
-(20, 'Filip', 'Kot', NULL, 4, '2019-09-09', 20, NULL, 205, 2, 'filip_k.jpg');
+INSERT INTO WIEZNIOWIE (imie, nazwisko, pseudonim, id_przestepstwa, data_przybycia, wyrok, gang, id_celi, id_stolowki, adres_zdjecia) VALUES
+-- Cela 31 (pojemność 4, zapełniona)
+('Piotr', 'Kowalski', 'Wilk', 1, '2022-05-01', 6, 'Wilki', 31, 1, 'piotr_kowalski.jpg'),
+('Adam', 'Nowak', 'Rekin', 2, '2021-07-15', 10, 'Rekiny', 31, 1, 'adam_nowak.jpg'),
+('Marek', 'Zielinski', 'Jastrzab', 3, '2020-03-11', 15, 'Orly', 31, 1, 'marek_zielinski.jpg'),
+('Tomasz', 'Lis', NULL, 4, '2023-01-25', 8, 'Hieny', 31, 1, 'tomasz_lis.jpg'),
+
+-- Cela 32 (pojemność 5, zapełniona)
+('Sebastian', 'Mazur', 'Tygrys', 6, '2023-03-20', 7, 'Wilki', 32, 1, 'sebastian_mazur.jpg'),
+('Grzegorz', 'Nowak', NULL, 8, '2022-04-15', 12, NULL, 32, 1, 'grzegorz_nowak.jpg'),
+('Karol', 'Krawczyk', 'Dzik', 5, '2021-02-10', 8, 'Hieny', 32, 1, 'karol_krawczyk.jpg'),
+('Artur', 'Kot', NULL, 7, '2022-05-11', 9, NULL, 32, 1, 'artur_kot.jpg'),
+('Jakub', 'Lis', 'Orzel', 9, '2020-08-15', 14, 'Wilki', 32, 1, 'jakub_lis.jpg'),
+
+-- Cela 33 (pojemność 6, zapełniona)
+('Andrzej', 'Adamski', 'Wilk', 10, '2023-06-10', 15, 'Rekiny', 33, 1, 'andrzej_adamski.jpg'),
+('Bartosz', 'Szymanski', NULL, 3, '2021-03-20', 7, NULL, 33, 1, 'bartosz_szymanski.jpg'),
+('Dominik', 'Bielawski', 'Jastrzab', 4, '2022-07-05', 10, 'Orly', 33, 1, 'dominik_bielawski.jpg'),
+('Patryk', 'Michalski', 'Sokol', 6, '2021-01-15', 12, 'Zubry', 33, 1, 'patryk_michalski.jpg'),
+('Lukasz', 'Mazur', 'Rekin', 5, '2022-11-20', 8, 'Wilki', 33, 1, 'lukasz_mazur.jpg'),
+('Tadeusz', 'Wroblewski', NULL, 8, '2023-03-30', 14, NULL, 33, 1, 'tadeusz_wroblewski.jpg'),
+
+-- Cela 34 (pojemność 6, zapełniona)
+('Jan', 'Wojcik', 'Lis', 4, '2023-02-10', 12, 'Wilki', 34, 1, 'jan_wojcik.jpg'),
+('Maciej', 'Wisniewski', NULL, 5, '2022-08-22', 8, NULL, 34, 1, 'maciej_wisniewski.jpg'),
+('Tomasz', 'Adamski', 'Orzel', 6, '2021-05-18', 10, 'Orly', 34, 1, 'tomasz_adamski.jpg'),
+('Wojciech', 'Zajac', 'Dzik', 7, '2022-07-15', 6, 'Wilki', 34, 1, 'wojciech_zajac.jpg'),
+('Sebastian', 'Mazur', NULL, 8, '2023-03-20', 7, NULL, 34, 1, 'sebastian_mazur_2.jpg'),
+('Kamil', 'Nowak', 'Tygrys', 9, '2021-06-30', 15, 'Tygrysy', 34, 1, 'kamil_nowak.jpg'),
+
+-- Cela 35 (pojemność 4, zapełniona)
+('Bartlomiej', 'Kot', 'Rekin', 10, '2023-01-05', 18, 'Rekiny', 35, 1, 'bartlomiej_kot.jpg'),
+('Grzegorz', 'Lis', 'Wilk', 3, '2021-09-22', 11, 'Wilki', 35, 1, 'grzegorz_lis.jpg'),
+('Piotr', 'Mazur', NULL, 4, '2020-06-14', 10, NULL, 35, 1, 'piotr_mazur.jpg'),
+('Janusz', 'Adamski', 'Lis', 6, '2022-04-20', 8, 'Wilki', 35, 1, 'janusz_adamski.jpg'),
+
+-- Cela 46 (pojemność 4, częściowo zapełniona)
+('Sebastian', 'Zajac', 'Dzik', 6, '2022-09-19', 9, 'Wilki', 46, 2, 'sebastian_zajac.jpg'),
+('Adrian', 'Szymanski', 'Wilk', 7, '2021-12-07', 11, 'Wilki', 46, 2, 'adrian_szymanski.jpg'),
+
+-- Cela 49 (pojemność 5, zapełniona)
+('Grzegorz', 'Kot', 'Tygrys', 8, '2023-05-20', 13, 'Tygrysy', 49, 1, 'grzegorz_kot_2.jpg'),
+('Patryk', 'Pietrzak', NULL, 9, '2022-01-03', 16, NULL, 49, 1, 'patryk_pietrzak.jpg'),
+('Piotr', 'Michalski', 'Harpun', 10, '2021-06-22', 14, 'Rekiny', 49, 1, 'piotr_michalski.jpg'),
+('Jan', 'Bielawski', 'Wilk', 3, '2020-03-12', 12, 'Wilki', 49, 1, 'jan_bielawski.jpg'),
+('Bartosz', 'Nowak', NULL, 4, '2022-08-15', 7, NULL, 49, 1, 'bartosz_nowak.jpg'),
+
+-- Cela 50 (pojemność 4, częściowo zapełniona)
+('Dariusz', 'Kowalski', 'Jastrzab', 5, '2023-02-28', 7, 'Orly', 50, 1, 'dariusz_kowalski.jpg'),
+('Marek', 'Zielinski', 'Wilk', 6, '2022-09-20', 10, 'Wilki', 50, 1, 'marek_zielinski_2.jpg'),
+('Daniel', 'Adamski', NULL, 9, '2021-10-22', 8, NULL, 50, 1, 'daniel_adamski.jpg');
+
 
 
 -- Insert into STOLOWKI (2 cafeterias)
