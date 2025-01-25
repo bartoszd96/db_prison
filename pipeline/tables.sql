@@ -69,7 +69,7 @@ CREATE TABLE WIEZNIOWIE (
  id_celi INTEGER REFERENCES CELE(id_celi),
  id_stolowki INTEGER REFERENCES STOLOWKI(id_stolowki),
  data_wyjscia DATE CHECK (data_wyjscia > data_przybycia),
- adres_zdjecia VARCHAR(20) UNIQUE
+ adres_zdjecia VARCHAR(200) UNIQUE
 );
 
 CREATE TABLE TRANSFERY (
