@@ -127,7 +127,7 @@ INSERT INTO ZAOPATRZENIE(id_produktu, id_sali, zapotrzebowanie_jednostkowe, obec
   (1, 2, 50, 13),
   (2, 2, 50, 23);
 
-INSERT TABLE KONTRAHENCI(nazwa, id_produktu, cena_produktu) VALUES
+INSERT INTO KONTRAHENCI(nazwa, id_produktu, cena_produktu) VALUES
   (Nestle, 1, 20);
 -- Insert into FINANSE (3 existing transactions + 5 new ones)
 INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy) VALUES
