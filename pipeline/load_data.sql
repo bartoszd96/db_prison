@@ -49,6 +49,7 @@ INSERT INTO STRAZNICY (id_odbiorcy, imie, nazwisko, id_placowki, wyplata) VALUES
 (4, 'Mariusz', 'Czerwinski', 2, 5300),
 (5, 'Krzysztof', 'Baran', 1, 5100);
 
+
 -- Insert into STOLOWKI (2 cafeterias)
 INSERT INTO STOLOWKI (id_placowki, pojemnosc_stolowki) VALUES
 (1, 50), (2, 40);
@@ -56,4 +57,17 @@ INSERT INTO STOLOWKI (id_placowki, pojemnosc_stolowki) VALUES
 -- Insert into MAGAZYNY (3 storage rooms)
 INSERT INTO MAGAZYNY (id_placowki, pojemnosc_magazynu) VALUES
 (1, 100), (2, 120), (1, 90);
+
+
+-- Insert into FINANSE (Transactions)
+INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy) VALUES
+(5000, '2024-01-15', 1),
+(3000, '2024-01-18', 2),
+(7000, '2024-01-20', 3);
+
+-- Insert into POZOSTALI_PRACOWNICY (Other employees)
+INSERT INTO POZOSTALI_PRACOWNICY (id_odbiorcy, imie, nazwisko, wyplata, id_placowki, stanowisko) VALUES
+(6, 'Anna', 'Nowak', 4500, 1, 'Kucharz'),
+(7, 'Janusz', 'Kowalczyk', 4800, 2, 'Lekarz'),
+(8, 'Ewa', 'Lis', 4700, 1, 'Ksiegowa');
 
