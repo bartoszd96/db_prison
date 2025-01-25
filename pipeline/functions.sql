@@ -14,7 +14,7 @@ BEGIN
 	END IF;
 	
 	IF ile >= pojemnosc THEN
-        RAISE EXCEPTION 'Cela jest już pełna. Nie można dodać więcej więźniów.';
+        RAISE EXCEPTION 'Cela jest juz pelna. Nie można dodać wiecej wiezniow.';
     END IF;
 	
 	RETURN NEW;
@@ -59,7 +59,7 @@ BEGIN
 	IF (Z1 = 1) AND (Z2 = 2) AND (Z3 = 3) THEN 
 		RETURN NEW;
 	ELSE 
-		RAISE EXCEPTION 'Błąd w danych, albo któryś strażnik nie istnieje, albo próbowano przypisać do go złej zmiany';
+		RAISE EXCEPTION 'Blad w danych, albo ktorys straznik nie istnieje, albo probowano przypisac do go zlej zmiany';
 	END IF;
 END;
 $$ LANGUAGE 'plpgsql';
@@ -82,7 +82,7 @@ BEGIN
 	WHERE p.id_celi = cela_out ;
 	
 	IF (ile_out IS NULL) OR (pojemnosc_out IS NULL) THEN
-		RAISE EXCEPTION 'Niepoprawne dane, upewnij się czy więzień jest w danej celi, oraz że cela do której chcesz go przenieść istnieje i ma wolne miejsce';
+		RAISE EXCEPTION 'Niepoprawne dane, upewnij sie czy wiezien jest w danej celi, oraz ze cela do ktorej chcesz go przeniesc istnieje i ma wolne miejsce';
 	END IF;
 	
 	IF (transferowany = 1) AND (pojemnosc_out > ile_out) THEN 
@@ -93,7 +93,7 @@ BEGIN
 		WHERE id_wieznia = id_w;
 		
 	ELSE 
-		RAISE EXCEPTION 'Niepoprawne dane, upewnij się czy więzień jest w danej placówce i celi, oraz że cela do której chcesz go przenieść istnieje i ma wolne miejsce';
+		RAISE EXCEPTION 'Niepoprawne dane, upewnij sie czy wiezien jest w danej placowce i celi, oraz ze cela do ktorej chcesz go przeniesc istnieje i ma wolne miejsce';
 	END IF;
 	
 END;
