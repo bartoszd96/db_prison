@@ -75,40 +75,6 @@ BEGIN
 END;
 $$ LANGUAGE 'plpgsql';
 
-
-//przetestowac
-CREATE OR REPLACE FUNCTION NOWA_PLACOWKA(id_placowki_z INTEGER, nazwa_z VARCHAR(100), miasto_z VARCHAR(100), ulica_z VARCHAR(100), nr_budynku_z INTEGER , longitude_z DECIMAL(9, 7),
- latitude_z DECIMAL(9, 7) RETURNS VOID AS $$
-
-BEGIN
-	
-	IF (id_p IS NULL) OR (nazwa IS NULL) or (miasto IS NULL) OR (ulica IS NULL) or (nr_budynku IS NULL) or (longitude IS NULL) or (latitude IS NULL) THEN
-		RAISE EXCEPTION 'Niepoprawne dane, upewnij się czy na pewno wpisałeś nazwę, miasto i ulicę (słowa) oraz numer budynku i obie współrzędne (liczby)';
-	END IF;
-	
-	IF (SELECT * FROM placowki p
-	WHERE p.id_placowki = id_placowki_z OR p.nazwa = nazwa_z OR (p.miasto=miasto_z AND p.ulica=ulica_z AND p.nr_budynku=nr_budynku_z) OR (p.longitude=longitude_z AND p.latitude=latitude_z) IS NOT NULL THEN 
-		RAISE EXCEPTION 'Niepoprawne dane, istnieje już placówka o tym numerze/nazwie/adresie/współrzędnych';
-        ELSE
-		INSERT INTO PLACOWKI(id_placowki, nazwa, miasto, ulica, nr_budynku, longitude, latitude) 
-		VALUES (id_placowki_z, nazwa_z, miasto_z, ulica_z, nr_budynku_z, longitude_z, latitude_z);
-
-INSERT INTO CELE(id_celi, id_placowki, pojemnosc_celi) 
-		VALUES (1, id_placowki_z, 2);
-
-INSERT INTO MAGAZYNY(id_magazynu, id_placowki, pojemnosc_magazynu) 
-		VALUES (1, id_placowki_z, 20);
-
-INSERT INTO STOLOWKI(id_stolowki, id_placowki, pojemnosc_stolowki) 
-		VALUES (1, id_placowki_z, 20);
-
-	END IF;
-
-	
-END;
-$$ LANGUAGE 'plpgsql';
-
-
 CREATE OR REPLACE FUNCTION WYSWIETL_OBECNYCH_WIEZNIOW(id_placowki_z INTEGER) RETURNS TABLE AS $$
 BEGIN
 RETURN
