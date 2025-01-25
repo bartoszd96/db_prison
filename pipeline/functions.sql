@@ -43,17 +43,25 @@ $$ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION UZUPELNIJ(id INTEGER)
 RETURNS VOID AS $$
 DECLARE
-    dokupic INTEGER;
+    dokupic_1 INTEGER;
+    dokupic_2 INTEGER;
     id_odbiorcy INTEGER;
 BEGIN
 
     SELECT COALESCE(zapotrzebowanie_jednostkowe - obecny_stan, 0)
-    INTO dokupic
-    FROM zaopatrzenie
-    WHERE id_produktu = id
-    LIMIT 1;
+    INTO dokupic_1
+    FROM zaopatrzenie z
+    JOIN magazyny m ON z.id_sali=m.id_magazynu;
+    WHERE z.id_produktu = id AND m.id_placowki=1;
 
-    IF dokupic > 0 THEN
+ SELECT COALESCE(zapotrzebowanie_jednostkowe - obecny_stan, 0)
+    INTO dokupic_2
+    FROM zaopatrzenie z
+    JOIN magazyny m ON z.id_sali=m.id_magazynu;
+    WHERE z.id_produktu = id AND m.id_placowki=2;
+
+
+    IF dokupic_1 > 0 THEN
         SELECT o.id_odbiorcy
         INTO id_odbiorcy
         FROM kontrahenci k
@@ -63,7 +71,21 @@ BEGIN
 
         IF id_odbiorcy IS NOT NULL THEN
             INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy)
-            VALUES (, dokupic * (SELECT cena_produktu FROM zaopatrzenie WHERE id_produktu = id LIMIT 1), CURRENT_DATE, id_odbiorcy);
+            VALUES (dokupic_1 * (SELECT cena_produktu FROM zaopatrzenie WHERE id_produktu = id LIMIT 1), CURRENT_DATE, id_odbiorcy);
+        END IF;
+    END IF;
+
+IF dokupic_2 > 0 THEN
+        SELECT o.id_odbiorcy
+        INTO id_odbiorcy
+        FROM kontrahenci k
+        JOIN odbiorcy o ON k.id_odbiorcy = o.id_odbiorcy
+        WHERE k.id_produktu = id
+        LIMIT 1;
+
+        IF id_odbiorcy IS NOT NULL THEN
+            INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy)
+            VALUES (dokupic_2 * (SELECT cena_produktu FROM zaopatrzenie WHERE id_produktu = id LIMIT 1), CURRENT_DATE, id_odbiorcy);
         END IF;
     END IF;
 END;
