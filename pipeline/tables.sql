@@ -107,7 +107,7 @@ CREATE TABLE KONTRAHENCI (
  id_kontrahenta INTEGER PRIMARY KEY,
  id_odbiorcy INTEGER NOT NULL REFERENCES ODBIORCY(id_odbiorcy),
  nazwa VARCHAR UNIQUE NOT NULL,
- id_produktu INTEGER REFERENCES ZAOPATRZENIE(id_produktu),
+ id_produktu INTEGER REFERENCES PRODUKTY(id_produktu),
  cena_produktu INTEGER NOT NULL
 );
 
