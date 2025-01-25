@@ -33,8 +33,7 @@ INSERT INTO PRZESTEPSTWA (wykroczenie, stopien_zagrozenia) VALUES
 
 -- Insert into WIEZNIOWIE (20 prisoners)
 INSERT INTO WIEZNIOWIE (id_wieznia, imie, nazwisko, pseudonim, id_przestepstwa, data_przybycia, wyrok, gang, id_celi, id_stolowki, adres_zdjecia) VALUES
-(1, 'Jan', 'Kowalski', 'Rekin', 2, '2023-05-10', 7, 'Bracia', 101, 1, 'C:\Users\koszm\OneDrive\Documents\ugh\bazki\zdjecie5.jpg') VALUES
-(1, 'Jan', 'Kowalski', 'Rekin', 2, '2023-05-10', 7, 'Bracia', 101, 1, 'zdjecie5.jpg''),
+(1, 'Jan', 'Kowalski', 'Rekin', 2, '2023-05-10', 7, 'Bracia', 101, 1, 'C:\Users\koszm\OneDrive\Documents\ugh\bazki\zdjecie5.jpg'),
 (2, 'Piotr', 'Nowak', 'Lis', 3, '2022-06-20', 15, 'Wilki', 101, 1, 'piotr_n.jpg'),
 (3, 'Andrzej', 'Wisniewski', 'Tygrys', 1, '2021-03-15', 5, 'Bracia', 102, 1, 'andrzej_w.jpg'),
 (4, 'Kamil', 'Lewandowski', NULL, 4, '2020-12-01', 10, NULL, 102, 1, 'kamil_l.jpg'),
