@@ -21,6 +21,25 @@ BEGIN
 END;
 $$ LANGUAGE 'plpgsql';
 
+
+CREATE OR REPLACE FUNCTION DODAJ_STRAZNIKA() RETURNS TRIGGER AS $$
+DECLARE 
+	ido INTEGER;
+BEGIN
+	SELECT max(o.id_odbiorcy) + 1 INTO ido FROM odbiorcy o;
+	
+	IF ido IS NULL THEN 
+	ido = 1;
+	END IF;
+	
+	INSERT INTO odbiorcy VALUES(ido);
+	
+	NEW.id_odbiorcy = ido;
+	
+	RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
+
 CREATE OR REPLACE FUNCTION DODAJ_CELE() RETURNS TRIGGER AS $$
 DECLARE 
 	Z1 INTEGER;
@@ -149,4 +168,3 @@ RETURN
 	WHERE w.id_placowki=id_placowki_z;
 END;
 $$ LANGUAGE 'plpgsql';
-

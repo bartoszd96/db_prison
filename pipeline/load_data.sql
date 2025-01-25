@@ -1,9 +1,20 @@
-INSERT INTO placowki(nazwa, adres, longitude, latitude) VALUES 
-('Zakład karny nr 1 we Wrocławiu', 'Kleczkowska 35, Wrocław 50-211', 51.127434, 17.0269411),
-('Zakład karny w Wołowie', 'Więzienna 6, Wołow 56-100', 51.2581917, 16.5629008);
+INSERT INTO placowki(nazwa, miasto, ulica, nr_budynku, longitude, latitude) VALUES 
+('Zakład karny nr 1 we Wrocławiu', 'Wrocław', 'Kleczkowska', 35, 51.127434, 17.0269411),
+('Zakład karny w Wołowie', 'Wołów', 'Więzienna', 6,  51.2581917, 16.5629008);
 
-INSERT INTO straznicy(id_placowki, wyplata) VALUES 
-(1, 7500), (1, 5000), (1, 6000), (1, 5000), (1, 5500), (1, 5000), (2, 5000), (2, 4500), (2, 5000), (2, 5500), (2, 7000), (2, 6000);
+INSERT INTO straznicy(id_placowki, wyplata, imie, nazwisko) VALUES
+(1, 7500, 'Jan', 'Kowalski'),
+(1, 5000, 'Anna', 'Nowak'),
+(1, 6000, 'Piotr', 'Wiśniewski'),
+(1, 5000, 'Katarzyna', 'Kamińska'),
+(1, 5500, 'Marek', 'Zieliński'),
+(1, 5000, 'Agnieszka', 'Szymańska'),
+(2, 5000, 'Tomasz', 'Wójcik'),
+(2, 4500, 'Ewa', 'Kowalczyk'),
+(2, 5000, 'Michał', 'Piotrowski'),
+(2, 5500, 'Joanna', 'Król'),
+(2, 7000, 'Łukasz', 'Mazur'),
+(2, 6000, 'Magdalena', 'Pawlak');
 
 INSERT INTO pomieszczenia(id_placowki, typ_sali, pojemnosc_magazynu, pojemnosc_celi, id_straznika_1, id_straznika_2, id_straznika_3) VALUES 
 (1, 'cela', NULL, 6, 1, 2, 3), (1, 'cela', NULL, 6, 4, 5, 6), (2, 'cela', NULL, 4, 7, 8, 9), (2, 'cela', NULL, 4, 10, 11, 12);
