@@ -16,8 +16,11 @@ INSERT INTO straznicy(id_placowki, wyplata, imie, nazwisko) VALUES
 (2, 7000, 'Łukasz', 'Mazur'),
 (2, 6000, 'Magdalena', 'Pawlak');
 
-INSERT INTO pomieszczenia(id_placowki, typ_sali, pojemnosc_magazynu, pojemnosc_celi, id_straznika_1, id_straznika_2, id_straznika_3) VALUES 
-(1, 'cela', NULL, 6, 1, 2, 3), (1, 'cela', NULL, 6, 4, 5, 6), (2, 'cela', NULL, 4, 7, 8, 9), (2, 'cela', NULL, 4, 10, 11, 12);
+INSERT INTO sektory(id_placowki, id_sektor) VALUES
+(1, 1), (1, 2), (1, 3), (1, 4), (2, 5), (2,6), (2, 7), (2, 8);
+
+INSERT INTO cele(id_placowki, id_sektor, pojemnosc_celi) VALUES 
+(1, 1, 6), (1, 1, 6), (1, 1, 6), (1, 2, 4), (1, 2, 4), (1, 2, 4);
 
 INSERT INTO PRZESTEPSTWA (wykroczenie, stopien_zagrozenia)
 VALUES 
