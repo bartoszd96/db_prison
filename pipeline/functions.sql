@@ -135,23 +135,49 @@ BEGIN
 END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE OR REPLACE FUNCTION WYSWIETL_OBECNYCH_WIEZNIOW RETURNS VOID AS $$
+CREATE OR REPLACE FUNCTION WYSWIETL_OBECNYCH_WIEZNIOW()
+RETURNS TABLE (
+    id_wieznia INT,
+    imie TEXT,
+    nazwisko TEXT,
+    pseudonim TEXT,
+    id_przestepstwa INT,
+    data_przybycia DATE,
+    wyrok TEXT,
+    gang TEXT,
+    id_celi INT,
+    id_stolowki INT,
+    data_wyjscia DATE,
+    adres_zdjecia TEXT
+) AS $$
 BEGIN
-RETURN
-	SELECT *
-	FROM wiezniowie w
-	WHERE w.data_wyjscia IS NOT NULL;
+    RETURN QUERY 
+    SELECT * FROM wiezniowie WHERE data_wyjscia IS NULL;
 END;
-$$ LANGUAGE 'plpgsql';
+$$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION WYSWIETL_BYLYCH_WIEZNIOW RETURNS VOID AS $$
+
+CREATE OR REPLACE FUNCTION WYSWIETL_BYLYCH_WIEZNIOW()
+RETURNS TABLE (
+    id_wieznia INT,
+    imie TEXT,
+    nazwisko TEXT,
+    pseudonim TEXT,
+    id_przestepstwa INT,
+    data_przybycia DATE,
+    wyrok TEXT,
+    gang TEXT,
+    id_celi INT,
+    id_stolowki INT,
+    data_wyjscia DATE,
+    adres_zdjecia TEXT
+) AS $$
 BEGIN
-RETURN
-	SELECT *
-	FROM wiezniowie w
-	WHERE w.data_wyjscia IS NULL;
+    RETURN QUERY 
+    SELECT * FROM wiezniowie WHERE data_wyjscia IS NOT NULL;
 END;
-$$ LANGUAGE 'plpgsql';
+$$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION WYSWIETL_STRAZNIKOW(id_placowki_z INTEGER) RETURNS TABLE AS $$
 BEGIN
