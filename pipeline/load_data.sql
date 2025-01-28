@@ -117,15 +117,20 @@ INSERT INTO WIEZNIOWIE (imie, nazwisko, pseudonim, id_przestepstwa, data_przybyc
 
 -- Insert into MAGAZYNY (3 storage rooms)
 INSERT INTO MAGAZYNY (id_placowki, pojemnosc_magazynu) VALUES
-(1, 100), (2, 120), (1, 90);
+(1, 100), (2, 120), (1, 90), (1, 100), (2, 130), (2, 100);
 
 INSERT INTO PRODUKTY(typ_produktu) VALUES 
 ('Jedzenie'), ('Ubrania'), ('Artykuly higieniczne'), ('Napoje'), ('Środki bezpieczeństwa');
 
-INSERT INTO ZAOPATRZENIE(id_produktu, id_sali, zapotrzebowanie_jednostkowe, obecny_stan) VALUES
-  (1, 1, 50, 20),
-  (1, 2, 50, 13),
-  (2, 2, 50, 23);
+INSERT INTO ZAOPATRZENIE(id_produktu, id_magazynu, obecny_stan) VALUES
+  (1, 1, 20),
+  (1, 2, 13),
+  (2, 2, 23), 
+  (2, 1, 10), 
+  (3, 1, 10), 
+  (4, 2, 30), 
+  (5, 3, 30), 
+  (1, 4, 50);
 
 INSERT INTO KONTRAHENCI(nazwa, id_produktu, cena_produktu) VALUES
   ('Nestle', 1, 20), ('Hugo Boss', 2, 100), ('PHU Czysty Dom', 3, 30), ('Dr Pepper Inc.', 4, 10), ('Militaria', 5, 150);
