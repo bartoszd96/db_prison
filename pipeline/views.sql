@@ -72,15 +72,15 @@ SELECT a.id_placowki, a.id_sektor, a.id_zmiany, 'Brak strażnika na zmianie' as 
 zmiany b ON a.id_sektor = b.id_sektor and a.id_zmiany = b.id_zmiany where (b.id_zmiany is null) or (b.id_straznika is null);
 
 
-CREATE VIEW pracownicy AS
+CREATE VIEW lista_pracownikow AS
 SELECT 
- "straznik" AS rodzaj_pracownika,
+ 'straznik' AS rodzaj_pracownika,
  id_straznika,
  id_odbiorcy, 
  imie,
  nazwisko,
  id_placowki,
- wyplata,
+ wyplata
 FROM straznicy
 
 UNION
