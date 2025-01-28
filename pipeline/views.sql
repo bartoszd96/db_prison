@@ -77,8 +77,8 @@ SELECT
  "straznik" AS rodzaj_pracownika,
  id_straznika,
  id_odbiorcy, 
- imie VARCHAR(20),
- nazwisko VARCHAR(20),
+ imie,
+ nazwisko,
  id_placowki,
  wyplata,
 FROM straznicy
@@ -89,8 +89,8 @@ SELECT
  stanowisko AS rodzaj_pracownika,
  id_pracownika,
  id_odbiorcy, 
- imie VARCHAR(20),
- nazwisko VARCHAR(20),
+ imie,
+ nazwisko,
  id_placowki,
  wyplata
 FROM pozostali_pracownicy;
