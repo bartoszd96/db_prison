@@ -128,7 +128,7 @@ INSERT INTO ZAOPATRZENIE(id_produktu, id_sali, zapotrzebowanie_jednostkowe, obec
   (2, 2, 50, 23);
 
 INSERT INTO KONTRAHENCI(nazwa, id_produktu, cena_produktu) VALUES
-  ('Nestle', 1, 20);
+  ('Nestle', 1, 20), ('Hugo Boss', 2, 100), ('PHU Czysty Dom', 3, 30), ('Dr Pepper Inc.', 4, 10), ('Militaria', 5, 150);
 -- Insert into FINANSE (3 existing transactions + 5 new ones)
 INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy) VALUES
 (5000, '2024-01-15', 1),
