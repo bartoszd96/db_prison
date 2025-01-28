@@ -1,35 +1,16 @@
-
 import psycopg2
-
 from tkinter import *
-
 from tkinter import ttk
-
 from PIL import Image, ImageTk
-
 import os
 
-
-
-
-
-# Initialize root window
-
 root = Tk()
-
 root.title('Więzienia System')
-
 root.geometry("1000x1000")
-
-
 
 def log_error(exception, trigger_name):
 
     print(f"Error: {exception} - Trigger: {trigger_name}")
-
-
-
-# Database connection function
 
 def connect_db():
 
@@ -51,19 +32,11 @@ def clear_content():
     for widget in content_frame.winfo_children():
         widget.destroy()
 
-
-
-
-# Function to add a prisoner
-
-
-
 def dodaj_wieznia():
     try:
         conn = connect_db()
         cursor = conn.cursor()
 
-        # Check if the cela and stolowka have capacity
         cursor.execute("SELECT COUNT(*) FROM wiezniowie WHERE id_celi = %s", (entries["Id celi"].get(),))
         cela_count = cursor.fetchone()[0]
         cursor.execute("SELECT COUNT(*) FROM wiezniowie WHERE id_stolowki = %s", (entries["Id stolowki"].get(),))
@@ -81,7 +54,6 @@ def dodaj_wieznia():
             result_label.config(text="Stołówka jest pełna! Wybierz inną stołówkę.")
             return
 
-        # Insert prisoner
         sql = '''INSERT INTO wiezniowie (imie, nazwisko, pseudonim, id_przestepstwa, data_przybycia, wyrok,
         gang, id_celi, id_stolowki, data_wyjscia, adres_zdjecia) VALUES (%s, %s, %s, %s, CURRENT_DATE, %s, %s, %s, %s, NULL, %s)'''
         values = (entries["Imie"].get(), entries["Nazwisko"].get(), entries["Pseudonim"].get(),
@@ -96,153 +68,80 @@ def dodaj_wieznia():
         log_error(e, "dodaj_wieznia")
         result_label.config(text="Błąd dodawania więźnia!")
 
-
-
-
-# Function to fetch current prisoners
-
 def wyswietl_obecnych_wiezniow():
 
     conn = connect_db()
-
     cursor = conn.cursor()
-
     cursor.execute("SELECT * FROM wiezniowie w WHERE w.data_wyjscia IS NULL")
-
     records = cursor.fetchall()
-
     conn.close()
-
     update_table(records)
 
-
-
-# Function to fetch former prisoners
 
 def wyswietl_bylych_wiezniow():
-
     conn = connect_db()
-
     cursor = conn.cursor()
-
     cursor.execute("SELECT * FROM wiezniowie w WHERE w.data_wyjscia IS NOT NULL")
-
     records = cursor.fetchall()
-
     conn.close()
-
     update_table(records)
-
-
-
-# Function to release a prisoner
 
 '''def wypusc_wieznia():
-
     id_wieznia = release_entry.get()
-
     conn = connect_db()
-
     cursor = conn.cursor()
-
     cursor.execute(
-
         "UPDATE wiezniowie SET data_wyjscia = CURRENT_DATE WHERE id_wieznia = %s AND data_wyjscia IS NULL",
-
         (id_wieznia,)
-
     )
-
     conn.commit()
-
     conn.close()
-
     wyswietl_obecnych_wiezniow()
-    
-     except Exception as e:
-
+      except Exception as e:
         log_error(e, "wypusc_wieznia")
-
         result_label.config(text="Jeszcze za wczesnie zeby wypuscic wieznia!")'''
-
-    
+   
 
 def szukaj_wieznia():
-
     typ = search_type.get()
-
     wartosc = search_entry.get()
-
     conn = connect_db()
-
     cursor = conn.cursor()
-
     sql = f"SELECT * FROM wiezniowie WHERE {typ} = %s"
-
     cursor.execute(sql, (wartosc,))
-
     records = cursor.fetchall()
-
     conn.close()
-
     update_table(records)
-
-
-
-# Function to update the prisoner list in TreeView
 
 def update_table(records):
 
     tree.delete(*tree.get_children())
-
     for record in records:
-
-        img_path = record[-1]  # Last column is photo path
-
+        img_path = record[-1]  
         if os.path.exists(img_path):
-
             img = Image.open(img_path).resize((50, 50))
-
             img = ImageTk.PhotoImage(img)
-
         else:
-
             img = None
-
     
         tree.insert("", "end", values=record[:-1] + (img,))
         
 def zmien_cela():
-
     id_wieznia = cell_id_entry.get()
-
     nowa_cela = new_cell_entry.get()
-
     conn = connect_db()
-
     cursor = conn.cursor()
-
     try:
-
         cursor.execute(
-
             "UPDATE wiezniowie SET id_celi = %s WHERE id_wieznia = %s",
-
             (nowa_cela, id_wieznia)
-
         )
-
         conn.commit()
-
         result_label.config(text="Cela zmieniona pomyślnie")
-
     except psycopg2.Error as e:
-
         result_label.config(text=f"Błąd: {e}")
-
     conn.close()
-
-    wyswietl_obecnych_wiezniow()  # Refresh prisoner list
+    wyswietl_obecnych_wiezniow()  
     
     
 
@@ -261,31 +160,18 @@ def wypusc_wieznia():
     try:
 
         conn = connect_db()
-
         cursor = conn.cursor()
-
         cursor.execute(
-
             "UPDATE wiezniowie SET data_wyjscia = CURRENT_DATE WHERE id_wieznia = %s AND data_wyjscia IS NULL",
-
             (id_wieznia,)
-
         )
-
         conn.commit()
-
         conn.close()
-
         wyswietl_obecnych_wiezniow()
-
         result_label.config(text=f"Więzień {id_wieznia} został zwolniony.")
 
-
-
     except Exception as e:
-
         log_error(e, "wypusc_wieznia")
-
         result_label.config(text="Błąd przy zwalnianiu więźnia!")
 
 
