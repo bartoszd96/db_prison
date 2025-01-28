@@ -98,8 +98,7 @@ CREATE TABLE PRODUKTY (
 
 CREATE TABLE ZAOPATRZENIE (
     id_produktu INTEGER NOT NULL REFERENCES PRODUKTY(id_produktu),
-    id_sali INTEGER NOT NULL REFERENCES MAGAZYNY(id_magazynu),
-    zapotrzebowanie_jednostkowe INTEGER NOT NULL,
+    id_magazynu INTEGER NOT NULL REFERENCES MAGAZYNY(id_magazynu),
     obecny_stan INTEGER NOT NULL,
     PRIMARY KEY (id_produktu, id_sali)
 );
