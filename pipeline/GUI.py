@@ -1,3 +1,11 @@
+''' 1. czemu stolowek nie pokazuje 
+2. czemu nie pokazuje mi tabeli dla wiezniow
+1. dodawanie, usuwanie pracowników/straznikow (jedna lista)
+3. zmiana wyplaty u pracowników/straznikow
+przypisywanie do zmian, 
+4. zrobienie wyplat/zakup produktu
+zdjeciaaaaaaa'''
+
 import psycopg2
 from tkinter import *
 from tkinter import ttk
