@@ -74,7 +74,7 @@ zmiany b ON a.id_sektor = b.id_sektor and a.id_zmiany = b.id_zmiany where (b.id_
 
 CREATE VIEW pracownicy AS
 SELECT 
- "straznik" AS rodzaj_pracownika
+ "straznik" AS rodzaj_pracownika,
  id_straznika,
  id_odbiorcy, 
  imie VARCHAR(20),
@@ -86,7 +86,7 @@ FROM straznicy
 UNION
 
 SELECT 
- stanowisko AS rodzaj_pracownika
+ stanowisko AS rodzaj_pracownika,
  id_pracownika,
  id_odbiorcy, 
  imie VARCHAR(20),
