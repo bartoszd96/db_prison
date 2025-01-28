@@ -1,7 +1,7 @@
 CREATE VIEW wydatki AS
 SELECT 
     id_transakcji, 
-    k.cena_produktu*kwota, 
+    p.cena_produktu*kwota, 
     data_transakcji, 
     f.id_odbiorcy, 
     'kontrahent' AS rodzaj_odbiorcy, 
@@ -9,6 +9,7 @@ SELECT
     nazwa AS nazwa_podmiotu
 FROM KONTRAHENCI k
 JOIN FINANSE f ON f.id_odbiorcy = k.id_odbiorcy
+JOIN PRODUKTY p ON p.id_produktu = k.id_produktu
 
 UNION
 
@@ -36,10 +37,10 @@ SELECT
 FROM STRAZNICY s
 JOIN FINANSE f ON f.id_odbiorcy = s.id_odbiorcy;
 
-CREATE VIEW stan_cele_1 AS
+CREATE VIEW oblozenie_cele AS
 SELECT 
     c.id_celi, 
-    -- Window function to calculate the cell's occupation rate per cell
+    c.id_placowki,
     COUNT(w.id_wieznia) OVER (PARTITION BY c.id_celi) AS zapelnienie_celi,
     c.pojemnosc_celi,
     z.id_straznika AS pilnujacy_straznik,
@@ -48,23 +49,21 @@ SELECT
     w.nazwisko
 FROM cele c
 LEFT JOIN wiezniowie w ON c.id_celi = w.id_celi
-LEFT JOIN zmiany z ON z.id_sektor = c.id_sektor
-WHERE c.id_placowki = 1;
+LEFT JOIN zmiany z ON z.id_sektor = c.id_sektor;
 
-CREATE VIEW stan_cele_2 AS
+CREATE VIEW oblozenie_stolowki AS
 SELECT 
-    c.id_celi, 
-    -- Window function to calculate the cell's occupation rate per cell
-    COUNT(w.id_wieznia) OVER (PARTITION BY c.id_celi) AS zapelnienie_celi,
-    c.pojemnosc_celi,
+    s.id_stolowki, 
+    s.id_placowki,
+    COUNT(w.id_wieznia) OVER (PARTITION BY s.id_stolowki) AS zapelnienie_stolowki,
+    s.pojemnosc_stolowki,
     z.id_straznika AS pilnujacy_straznik,
     w.id_wieznia, 
     w.imie, 
     w.nazwisko
-FROM cele c
-LEFT JOIN wiezniowie w ON c.id_celi = w.id_celi
-LEFT JOIN zmiany z ON z.id_sektor = c.id_sektor
-WHERE c.id_placowki = 2;
+FROM stolowki s
+LEFT JOIN wiezniowie w ON s.id_stolowki = w.id_stolowki
+LEFT JOIN zmiany z ON z.id_sektor = s.id_sektor;
 
 
 CREATE OR REPLACE VIEW zmiany_braki AS
