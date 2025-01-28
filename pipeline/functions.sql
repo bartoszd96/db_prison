@@ -40,62 +40,47 @@ BEGIN
 END
 $$ LANGUAGE 'plpgsql';
 
-CREATE OR REPLACE FUNCTION UZUPELNIJ(id INTEGER)
+CREATE OR REPLACE FUNCTION UZUPELNIJ(id_p INTEGER, amt INTEGER, id_m INTEGER)
 RETURNS VOID AS $$
 DECLARE
-    dokupic_1 INTEGER;
-    dokupic_2 INTEGER;
-    id_odbiorcy INTEGER;
-cena INTEGER;
+	ids_p INTEGER[];
+	ids_m INTEGER[];
+	curr_amt INTEGER;
+	curr_cap INTEGER;
+	id_o INTEGER;
+	cena INTEGER;
 BEGIN
 
-    SELECT COALESCE(z.zapotrzebowanie_jednostkowe - z.obecny_stan, 0)
-    INTO dokupic_1
-    FROM zaopatrzenie z
-    JOIN magazyny m ON z.id_sali=m.id_magazynu
-    WHERE z.id_produktu = id AND m.id_placowki=1;
+SELECT ARRAY(SELECT p.id_produktu FROM produkty p) INTO ids_p;
+SELECT ARRAY(SELECT m.id_magazynu FROM magazyny m) INTO ids_m;
 
- SELECT COALESCE(z.zapotrzebowanie_jednostkowe - z.obecny_stan, 0)
-    INTO dokupic_2
-    FROM zaopatrzenie z
-    JOIN magazyny m ON z.id_sali=m.id_magazynu
-    WHERE z.id_produktu = id AND m.id_placowki=2;
+IF NOT (id_p = ANY(ids_p)) THEN
+	RAISE EXCEPTION 'Produkt o takim id nie istnieje';
+END IF;
 
-        SELECT p.cena_produktu INTO cena 
-	FROM produkty p
-	WHERE p.id_produktu = id;
+IF NOT (id_m = ANY(ids_m)) THEN
+	RAISE EXCEPTION 'Magazyn o takim id nie istnieje';
+END IF;
 
-    IF dokupic_1 > 0 THEN
-        SELECT o.id_odbiorcy
-        INTO id_odbiorcy
-        FROM kontrahenci k
-        JOIN odbiorcy o ON k.id_odbiorcy = o.id_odbiorcy
-        WHERE k.id_produktu = id;
+SELECT sum(z.obecny_stan) INTO curr_amt FROM zaopatrzenie z WHERE z.id_magazynu = id_m;
 
-UPDATE TABLE zaopatrzenie z SET z.obecny_stan=z.zapotrzebowanie_jednostkowe
-	WHERE z.id.produktu=id;
+IF curr_amt IS NULL THEN
+	curr_amt = 0;
+END IF;
 
-        IF id_odbiorcy IS NOT NULL THEN
-            INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy)
-            VALUES (dokupic_1 *cena , CURRENT_DATE, id_odbiorcy);
-        END IF;
-    END IF;
+SELECT m.pojemnosc_magazynu INTO curr_cap FROM magazyny m WHERE (m.id_magazynu = id_m);
 
-IF dokupic_2 > 0 THEN
-        SELECT o.id_odbiorcy
-        INTO id_odbiorcy
-        FROM kontrahenci k
-        JOIN odbiorcy o ON k.id_odbiorcy = o.id_odbiorcy
-        WHERE k.id_produktu = id
-        LIMIT 1;
-UPDATE TABLE zaopatrzenie z SET z.obecny_stan=z.zapotrzebowanie_jednostkowe
-	WHERE z.id.produktu=id;
+IF curr_cap < curr_amt + amt THEN
+	RAISE EXCEPTION 'Nie możesz tyle zamówić, nie starczy miejsca w magazynie';
+END IF;
 
-        IF id_odbiorcy IS NOT NULL THEN
-            INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy)
-            VALUES (dokupic_2 * cena, CURRENT_DATE, id_odbiorcy);
-        END IF;
-    END IF;
+UPDATE zaopatrzenie SET obecny_stan = obecny_stan + amt WHERE id_produktu=id_p;
+
+SELECT k.id_odbiorcy INTO id_o FROM kontrahenci k WHERE k.id_produktu = id_p;
+SELECT k.cena_produktu into cena FROM kontrahenci k WHERE k.id_produktu = id_p;
+
+INSERT INTO finanse(kwota, data_transakcji, id_odbiorcy) VALUES (amt*cena, '2025-01-25', id_o);
+ 
 END;
 $$ LANGUAGE plpgsql;
 
