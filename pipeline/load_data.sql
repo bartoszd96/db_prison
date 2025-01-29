@@ -61,7 +61,7 @@ INSERT INTO PRZESTEPSTWA (wykroczenie, stopien_zagrozenia) VALUES
 ('Kradziez', 2), ('Napad', 3), ('Zabojstwo', 5), ('Handel narkotykami', 4), ('Przekret finansowy', 3), ('Podpalenie', 4), ('Pobicie', 3), ('Falszerstwo', 3), ('Morderstwo', 5), ('Dzielenie przez 0', 1),  ('Zaklocanie porzadku', 1);
 
 -- Insert into STOLOWKI (2 cafeterias)
-INSERT INTO STOLOWKI (id_placowki, pojemnosc_stolowki, id_sektora) VALUES
+INSERT INTO STOLOWKI (id_placowki, pojemnosc_stolowki, id_sektor) VALUES
 (1, 50, 103), (2, 40, 202);
 
 -- Insert into WIEZNIOWIE (20 prisoners)
