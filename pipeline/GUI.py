@@ -682,6 +682,81 @@ def pokaz_produkty():
     except Exception as e:
         log_error(e, "pokaz_pracownikow")
 
+def zrob_zakupy():
+    clear_content()
+    show_zakupy_controls()
+
+    global tree
+    tree = ttk.Treeview(content_frame, columns=("id_produktu", "typ_produktu", "cena_produktu"), show="headings")
+
+    # Definiowanie nagłówków kolumn
+    col_names = ["Id produktu", "Typ produktu", "Cena"]
+    for col, name in zip(("id_produktu", "typ_produktu", "cena_produktu"), col_names):
+        tree.heading(col, text=name)
+        tree.column(col, anchor="center", width=100)
+
+    tree.pack(side=TOP, fill=BOTH, expand=True)
+
+    try:
+        conn = connect_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM produkty")  
+        records = cursor.fetchall()
+        conn.close()
+
+        for row in records:
+            tree.insert("", "end", values=row)
+
+    except Exception as e:
+        log_error(e, "zrob_zakupy")
+
+def show_zakupy_controls():
+    global idp_entry, amt_entry, idm_entry, result_label
+    
+    Label(content_frame, text="Id produktu:").pack()
+    idp_entry = Entry(content_frame)
+    idp_entry.pack()
+    
+    Label(content_frame, text="Ilość:").pack()
+    amt_entry = Entry(content_frame)
+    amt_entry.pack()
+    
+    Label(content_frame, text="Id magazynu:").pack()
+    idm_entry = Entry(content_frame)
+    idm_entry.pack()
+    
+    Button(content_frame, text="Zrób zakupy", command=lambda: zakup()).pack()
+    
+    result_label = Label(content_frame, text="", fg="red")
+    result_label.pack()
+
+def zakup():
+    
+    idp = idp_entry.get().strip()
+    if not idp:
+        result_label.config(text="Podaj id produktu!")
+
+    amt = amt_entry.get().strip()
+    if not amt:
+        result_label.config(text="Podaj ilość produktu!")
+
+    idm = idm_entry.get().strip()
+    if not idm:
+        result_label.config(text="Podaj id magazynu!")
+
+    try:
+        conn = connect_db()
+        cursor = conn.cursor()
+        sql = "SELECT uzupelnij(%s, %s, %s)"
+        cursor.execute(sql, (idp, amt, idm))
+        conn.commit()
+        conn.close()
+
+        result_label.config(text=f"Zrobiono zakupy", fg="green")
+
+    except Exception as e:
+        log_error(e, 'zakup')
+        result_label.config(text="Błąd przy robieniu zakupów!", fg="red")
 
 
 # Sidebar menu
@@ -698,6 +773,7 @@ Button(side_menu, text="Stolowki (w)", command=pokaz_stolowki).pack(pady=5)
 Button(side_menu, text="Cele (w)", command=pokaz_cele).pack(pady=5)
 Button(side_menu, text="Finanse (w)", command=pokaz_finanse).pack(pady=5)
 Button(side_menu, text="Zmiany Strażników (w)", command=pokaz_zmiany).pack(pady=5)
+Button(side_menu, text="Zrób zakupy", command=zrob_zakupy).pack(pady=5)
 
     # Content frame
 content_frame = Frame(root)
