@@ -48,10 +48,10 @@ CREATE VIEW oblozenie_stolowki AS
 SELECT 
     s.id_stolowki, 
     s.id_placowki,
-    COUNT(w.id_wieznia) OVER (PARTITION BY s.id_stolowki) AS zapelnienie_stolowki,
+    t.zapelnienie,
     s.pojemnosc_stolowki
 FROM stolowki s
-LEFT JOIN wiezniowie w ON s.id_stolowki = w.id_stolowki;
+LEFT JOIN (select w.id_stolowki, count(w.id_wieznia) as zapelnienie from wiezniowie w group by id_stolowki) t ON s.id_stolowki = t.id_stolowki;
 
 CREATE VIEW oblozenie_magazynu AS
 SELECT 
