@@ -100,13 +100,6 @@ def wyswietl_obecnych_wiezniow():
         
     except Exception as e:
         log_error(e, "pokaz_przestepstwa")
-        
-    '''conn = connect_db()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM wiezniowie w WHERE w.data_wyjscia IS NULL")
-    records = cursor.fetchall()
-    conn.close()
-    update_table_w(records)''' 
 
 
 def wyswietl_bylych_wiezniow():
@@ -134,28 +127,6 @@ def wyswietl_bylych_wiezniow():
         
     except Exception as e:
         log_error(e, "pokaz_przestepstwa")
-        
-    '''conn = connect_db()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM wiezniowie w WHERE w.data_wyjscia IS NOT NULL")
-    records = cursor.fetchall()
-    conn.close()
-    update_table_w(records)'''
-
-'''def wypusc_wieznia():
-    id_wieznia = release_entry.get()
-    conn = connect_db()
-    cursor = conn.cursor()
-    cursor.execute(
-        "UPDATE wiezniowie SET data_wyjscia = CURRENT_DATE WHERE id_wieznia = %s AND data_wyjscia IS NULL",
-        (id_wieznia,)
-    )
-    conn.commit()
-    conn.close()
-    wyswietl_obecnych_wiezniow()
-      except Exception as e:
-        log_error(e, "wypusc_wieznia")
-        result_label.config(text="Jeszcze za wczesnie zeby wypuscic wieznia!")'''
    
 
 def szukaj_wieznia():
