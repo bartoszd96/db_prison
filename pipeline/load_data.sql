@@ -119,8 +119,8 @@ INSERT INTO WIEZNIOWIE (imie, nazwisko, pseudonim, id_przestepstwa, data_przybyc
 INSERT INTO MAGAZYNY (id_placowki, pojemnosc_magazynu) VALUES
 (1, 100), (2, 120), (1, 90), (1, 100), (2, 130), (2, 100);
 
-INSERT INTO PRODUKTY(typ_produktu) VALUES 
-('Jedzenie'), ('Ubrania'), ('Artykuly higieniczne'), ('Napoje'), ('Środki bezpieczeństwa');
+INSERT INTO PRODUKTY(typ_produktu, cena_produktu) VALUES 
+('Jedzenie', 20), ('Ubrania', 100), ('Artykuly higieniczne', 30), ('Napoje', 10), ('Środki bezpieczeństwa', 150);
 
 INSERT INTO ZAOPATRZENIE(id_produktu, id_magazynu, obecny_stan) VALUES
   (1, 1, 20),
@@ -132,8 +132,8 @@ INSERT INTO ZAOPATRZENIE(id_produktu, id_magazynu, obecny_stan) VALUES
   (5, 3, 30), 
   (1, 4, 50);
 
-INSERT INTO KONTRAHENCI(nazwa, id_produktu, cena_produktu) VALUES
-  ('Nestle', 1, 20), ('Hugo Boss', 2, 100), ('PHU Czysty Dom', 3, 30), ('Dr Pepper Inc.', 4, 10), ('Militaria', 5, 150);
+INSERT INTO KONTRAHENCI(nazwa, id_produktu) VALUES
+  ('Nestle', 1), ('Hugo Boss', 2), ('PHU Czysty Dom', 3), ('Dr Pepper Inc.', 4), ('Militaria', 5);
 -- Insert into FINANSE (3 existing transactions + 5 new ones)
 INSERT INTO FINANSE (kwota, data_transakcji, id_odbiorcy) VALUES
 (5000, '2024-01-15', 1),
