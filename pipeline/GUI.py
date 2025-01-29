@@ -1,7 +1,6 @@
 '''1. zmiana wyplaty jakos nie dziala, czasami nic nie robi, czasami usuwa? 
 2. przypisywanie do zmian trzeba gdzieś dać
 3.  zrobienie wyplat/zakup produktu 
-4. zniknęła mi tabela dla wiezniow xd
 5. zdjecia?'''
 
 
@@ -74,71 +73,104 @@ def dodaj_wieznia():
     except Exception as e:
         log_error(e, "dodaj_wieznia")
         result_label.config(text="Błąd dodawania więźnia!")
+        
+def clear_treeview():
+    """ Usuwa stare Treeview, jeśli istnieje """
+    for widget in content_frame.winfo_children():
+        if isinstance(widget, ttk.Treeview) or isinstance(widget, Scrollbar):
+            widget.destroy()
+
 
 def wyswietl_obecnych_wiezniow():
-    global tree  # Re-declare tree so it can be reused globally
+    global tree  
+
+    clear_treeview()  # Usunięcie starego Treeview
+
     tree = ttk.Treeview(content_frame, columns=("ID", "Imie", "Nazwisko", "Stanowisko"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("Imie", text="Imie")
     tree.heading("Nazwisko", text="Nazwisko")
     tree.heading("Stanowisko", text="Stanowisko")
     tree.pack(side=RIGHT, fill=BOTH, expand=True)
-    
+
     scrollbar = Scrollbar(content_frame, orient="vertical", command=tree.yview)
     scrollbar.pack(side=RIGHT, fill=Y)
     tree.configure(yscrollcommand=scrollbar.set)
-    
+
     try:
         conn = connect_db()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM wiezniowie WHERE data_wyjscia IS NULL")  # Ensure correct column names
+        cursor.execute("SELECT * FROM wiezniowie WHERE data_wyjscia IS NULL")
         records = cursor.fetchall()
         conn.close()
-        
+
         for row in records:
             tree.insert("", "end", values=row)
-        
-    except Exception as e:
-        log_error(e, "pokaz_przestepstwa")
 
+    except Exception as e:
+        log_error(e, "wyswietl_obecnych_wiezniow")
 
 def wyswietl_bylych_wiezniow():
-    global tree  # Re-declare tree so it can be reused globally
+    global tree  
+
+    clear_treeview()  # Usunięcie starego Treeview
+
     tree = ttk.Treeview(content_frame, columns=("ID", "Imie", "Nazwisko", "Stanowisko"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("Imie", text="Imie")
     tree.heading("Nazwisko", text="Nazwisko")
     tree.heading("Stanowisko", text="Stanowisko")
     tree.pack(side=RIGHT, fill=BOTH, expand=True)
-    
+
     scrollbar = Scrollbar(content_frame, orient="vertical", command=tree.yview)
     scrollbar.pack(side=RIGHT, fill=Y)
     tree.configure(yscrollcommand=scrollbar.set)
-    
+
     try:
         conn = connect_db()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM wiezniowie WHERE data_wyjscia IS NOT NULL")  # Ensure correct column names
+        cursor.execute("SELECT * FROM wiezniowie WHERE data_wyjscia IS NOT NULL")
         records = cursor.fetchall()
         conn.close()
-        
+
         for row in records:
             tree.insert("", "end", values=row)
-        
+
     except Exception as e:
-        log_error(e, "pokaz_przestepstwa")
-   
+        log_error(e, "wyswietl_bylych_wiezniow")
 
 def szukaj_wieznia():
     typ = search_type.get()
     wartosc = search_entry.get()
-    conn = connect_db()
-    cursor = conn.cursor()
-    sql = f"SELECT * FROM wiezniowie WHERE {typ} = %s"
-    cursor.execute(sql, (wartosc,))
-    records = cursor.fetchall()
-    conn.close()
-    update_table(records)
+
+    global tree  
+
+    clear_treeview()  # Usunięcie starego Treeview
+
+    tree = ttk.Treeview(content_frame, columns=("ID", "Imie", "Nazwisko", "Stanowisko"), show="headings")
+    tree.heading("ID", text="ID")
+    tree.heading("Imie", text="Imie")
+    tree.heading("Nazwisko", text="Nazwisko")
+    tree.heading("Stanowisko", text="Stanowisko")
+    tree.pack(side=RIGHT, fill=BOTH, expand=True)
+
+    scrollbar = Scrollbar(content_frame, orient="vertical", command=tree.yview)
+    scrollbar.pack(side=RIGHT, fill=Y)
+    tree.configure(yscrollcommand=scrollbar.set)
+
+    try:
+        conn = connect_db()
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT * FROM wiezniowie WHERE {typ} = %s", (wartosc,))
+        records = cursor.fetchall()
+        conn.close()
+
+        for row in records:
+            tree.insert("", "end", values=row)
+
+    except Exception as e:
+        log_error(e, "szukaj_wieznia")
+
 
 def update_table_w(records):
 
@@ -178,42 +210,13 @@ def zmien_cela():
     
     
 
-def wypusc_wieznia():
-
-    id_wieznia = release_entry.get().strip()
-
-    if not id_wieznia:
-
-        result_label.config(text="Podaj ID więźnia!")
-
-        return
-
-
-
-    try:
-
-        conn = connect_db()
-        cursor = conn.cursor()
-        cursor.execute(
-            "UPDATE wiezniowie SET data_wyjscia = CURRENT_DATE WHERE id_wieznia = %s AND data_wyjscia IS NULL",
-            (id_wieznia,)
-        )
-        conn.commit()
-        conn.close()
-        wyswietl_obecnych_wiezniow()
-        result_label.config(text=f"Więzień {id_wieznia} został zwolniony.")
-
-    except Exception as e:
-        log_error(e, "wypusc_wieznia")
-        result_label.config(text="Błąd przy zwalnianiu więźnia!")
-
-
 # GUI Setup
 
 def pokaz_wiezniow():
     clear_content()
 
-    global entries  
+    global entries, release_entry, result_label, cell_id_entry, search_type, search_entry, new_cell_entry  # Dodajemy globalne zmienne
+
     my_frame = LabelFrame(content_frame, text="Dane więźnia")
     my_frame.pack(pady=20)
 
@@ -225,13 +228,12 @@ def pokaz_wiezniow():
         entry = Entry(my_frame)
         entry.grid(row=i, column=1, pady=5, padx=10)
         entries[field] = entry  
-   
 
     Button(my_frame, text="Dodaj więźnia", command=dodaj_wieznia).grid(row=10, column=0, pady=10, padx=10)
     Button(my_frame, text="Wyświetl obecnych", command=wyswietl_obecnych_wiezniow).grid(row=11, column=0, pady=10, padx=10)
     Button(my_frame, text="Wyświetl byłych", command=wyswietl_bylych_wiezniow).grid(row=11, column=1, pady=10, padx=10)
 
-    # Search prisoner section
+    # Sekcja wyszukiwania więźnia
     search_frame = LabelFrame(content_frame, text="Szukaj więźnia")
     search_frame.pack(pady=10)
 
@@ -242,16 +244,16 @@ def pokaz_wiezniow():
     search_entry.pack(side=LEFT, padx=5)
     Button(search_frame, text="Szukaj", command=szukaj_wieznia).pack(side=LEFT, padx=5)
 
-    # Update Release Date Section
+    # Sekcja zmiany daty wyjścia
     release_frame = LabelFrame(content_frame, text="Zmień datę wyjścia")
     release_frame.pack(pady=10)
 
     Label(release_frame, text="ID więźnia:").pack(side=LEFT, padx=5)
-    release_entry = Entry(release_frame)
+    release_entry = Entry(release_frame)  # Globalna zmienna
     release_entry.pack(side=LEFT, padx=5)
     Button(release_frame, text="Wypuść więźnia", command=wypusc_wieznia).pack(pady=10, padx=10)
 
-    # Change Cell Section
+    # Sekcja zmiany celi
     cell_frame = LabelFrame(content_frame, text="Zmień celę więźnia")
     cell_frame.pack(pady=10)
 
@@ -265,11 +267,37 @@ def pokaz_wiezniow():
 
     Button(cell_frame, text="Zmień celę", command=zmien_cela).pack(side=LEFT, padx=5)
 
-    # Result label
+    # Tworzymy etykietę wyników globalnie
     result_label = Label(content_frame, text="")
     result_label.pack()
 
-    wyswietl_obecnych_wiezniow()
+
+def wypusc_wieznia():
+    global release_entry, result_label  # Upewniamy się, że zmienne są globalne
+
+    id_wieznia = release_entry.get().strip()
+
+    if not id_wieznia:
+        result_label.config(text="Podaj ID więźnia!", fg="red")
+        return
+
+    try:
+        conn = connect_db()
+        cursor = conn.cursor()
+        cursor.execute(
+            "UPDATE wiezniowie SET data_wyjscia = CURRENT_DATE WHERE id_wieznia = %s AND data_wyjscia IS NULL",
+            (id_wieznia,)
+        )
+        conn.commit()
+        conn.close()
+        wyswietl_obecnych_wiezniow()
+        result_label.config(text=f"Więzień {id_wieznia} został zwolniony.", fg="green")
+
+    except Exception as e:
+        log_error(e, "wypusc_wieznia")
+        result_label.config(text="Błąd przy zwalnianiu więźnia!", fg="red")
+
+
 
 
     
