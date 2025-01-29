@@ -40,10 +40,7 @@ SELECT
     c.id_placowki,
     COUNT(w.id_wieznia) OVER (PARTITION BY c.id_celi) AS zapelnienie_celi,
     c.pojemnosc_celi,
-    z.id_straznika AS pilnujacy_straznik,
-    w.id_wieznia, 
-    w.imie, 
-    w.nazwisko
+    z.id_straznika AS pilnujacy_straznik
 FROM cele c
 LEFT JOIN wiezniowie w ON c.id_celi = w.id_celi
 LEFT JOIN zmiany z ON z.id_sektor = c.id_sektor;
@@ -54,10 +51,7 @@ SELECT
     s.id_placowki,
     COUNT(w.id_wieznia) OVER (PARTITION BY s.id_stolowki) AS zapelnienie_stolowki,
     s.pojemnosc_stolowki,
-    z.id_straznika AS pilnujacy_straznik,
-    w.id_wieznia, 
-    w.imie, 
-    w.nazwisko
+    z.id_straznika AS pilnujacy_straznik
 FROM stolowki s
 LEFT JOIN wiezniowie w ON s.id_stolowki = w.id_stolowki
 LEFT JOIN zmiany z ON z.id_sektor = s.id_sektor;
