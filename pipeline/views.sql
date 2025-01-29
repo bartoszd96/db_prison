@@ -50,10 +50,8 @@ SELECT
     s.id_placowki,
     COUNT(w.id_wieznia) OVER (PARTITION BY s.id_stolowki) AS zapelnienie_stolowki,
     s.pojemnosc_stolowki,
-    z.id_straznika AS pilnujacy_straznik
 FROM stolowki s
-LEFT JOIN wiezniowie w ON s.id_stolowki = w.id_stolowki
-LEFT JOIN zmiany z ON z.id_sektor = s.id_sektor;
+LEFT JOIN wiezniowie w ON s.id_stolowki = w.id_stolowki;
 
 CREATE VIEW oblozenie_magazynu AS
 SELECT 
