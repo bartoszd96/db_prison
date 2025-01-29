@@ -77,7 +77,7 @@ END IF;
 UPDATE zaopatrzenie SET obecny_stan = obecny_stan + amt WHERE id_produktu=id_p;
 
 SELECT k.id_odbiorcy INTO id_o FROM kontrahenci k WHERE k.id_produktu = id_p;
-SELECT k.cena_produktu into cena FROM kontrahenci k WHERE k.id_produktu = id_p;
+SELECT p.cena_produktu into cena FROM produkty p WHERE p.id_produktu = id_p;
 
 INSERT INTO finanse(kwota, data_transakcji, id_odbiorcy) VALUES (amt*cena, '2025-01-25', id_o);
  
