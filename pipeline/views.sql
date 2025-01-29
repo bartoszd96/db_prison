@@ -49,7 +49,7 @@ SELECT
     s.id_stolowki, 
     s.id_placowki,
     COUNT(w.id_wieznia) OVER (PARTITION BY s.id_stolowki) AS zapelnienie_stolowki,
-    s.pojemnosc_stolowki,
+    s.pojemnosc_stolowki
 FROM stolowki s
 LEFT JOIN wiezniowie w ON s.id_stolowki = w.id_stolowki;
 
