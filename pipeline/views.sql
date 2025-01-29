@@ -39,11 +39,10 @@ SELECT
     c.id_celi, 
     c.id_placowki,
     COUNT(w.id_wieznia) OVER (PARTITION BY c.id_celi) AS zapelnienie_celi,
-    c.pojemnosc_celi,
-    z.id_straznika AS pilnujacy_straznik
+    c.pojemnosc_celi
 FROM cele c
-LEFT JOIN wiezniowie w ON c.id_celi = w.id_celi
-LEFT JOIN zmiany z ON z.id_sektor = c.id_sektor;
+LEFT JOIN wiezniowie w ON c.id_celi = w.id_celi;
+
 
 CREATE VIEW oblozenie_stolowki AS
 SELECT 
