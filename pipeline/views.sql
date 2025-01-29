@@ -1,11 +1,11 @@
 CREATE VIEW wydatki AS
 SELECT 
-    id_transakcji, 
+    f.id_transakcji, 
     p.cena_produktu*kwota, 
-    data_transakcji, 
+    f.data_transakcji, 
     f.id_odbiorcy, 
     'kontrahent' AS rodzaj_odbiorcy, 
-    nazwa AS nazwa_podmiotu
+    k.nazwa AS nazwa_podmiotu
 FROM KONTRAHENCI k
 JOIN FINANSE f ON f.id_odbiorcy = k.id_odbiorcy
 JOIN PRODUKTY p ON p.id_produktu = k.id_produktu
@@ -13,24 +13,24 @@ JOIN PRODUKTY p ON p.id_produktu = k.id_produktu
 UNION
 
 SELECT 
-    id_transakcji, 
+    f.id_transakcji, 
     p.wyplata AS kwota, 
-    data_transakcji, 
+    f.data_transakcji, 
     f.id_odbiorcy, 
     'pracownik administracyjny' AS rodzaj_odbiorcy, 
-    nazwisko AS nazwa_podmiotu
+    p.nazwisko AS nazwa_podmiotu
 FROM pozostali_pracownicy p
 JOIN FINANSE f ON f.id_odbiorcy = p.id_odbiorcy
 
 UNION
 
 SELECT 
-    id_transakcji, 
+    f.id_transakcji, 
    s.wyplata AS kwota, 
-    data_transakcji, 
+    f.data_transakcji, 
     f.id_odbiorcy, 
     'straznik' AS rodzaj_odbiorcy, 
-    nazwisko AS nazwa_podmiotu
+    s.nazwisko AS nazwa_podmiotu
 FROM STRAZNICY s
 JOIN FINANSE f ON f.id_odbiorcy = s.id_odbiorcy;
 
