@@ -1,5 +1,4 @@
-'''1. zmiana wyplaty jakos nie dziala, czasami nic nie robi, czasami usuwa? 
-2. przypisywanie do zmian trzeba gdzieś dać
+'''2. przypisywanie do zmian trzeba gdzieś dać
 3.  zrobienie wyplat/zakup produktu 
 5. zdjecia?'''
 
@@ -84,13 +83,19 @@ def clear_treeview():
 def wyswietl_obecnych_wiezniow():
     global tree  
 
-    clear_treeview()  # Usunięcie starego Treeview
+    clear_treeview()  
 
-    tree = ttk.Treeview(content_frame, columns=("ID", "Imie", "Nazwisko", "Stanowisko"), show="headings")
+    tree = ttk.Treeview(content_frame, columns=("ID", "Imie", "Nazwisko", "Pseudonim", "Id_przestepstwa", "Data_przybycia", "Wyrok", "Gang", "Id_celi", "Id_stolowki", "Data_wyjscia"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("Imie", text="Imie")
-    tree.heading("Nazwisko", text="Nazwisko")
-    tree.heading("Stanowisko", text="Stanowisko")
+    tree.heading("Pseudonim", text="Pseudonim")
+    tree.heading("Id_przestepstwa", text="Id_przestepstwa")
+    tree.heading("Data_przybycia", text="Data_przybycia")
+    tree.heading("Wyrok", text="Wyrok")
+    tree.heading("Gang", text="Gang")
+    tree.heading("Id_celi", text="Id_celi")
+    tree.heading("Id_stolowki", text="Id_stolowki")
+    tree.heading("Data_wyjscia", text="Data_wyjscia")
     tree.pack(side=RIGHT, fill=BOTH, expand=True)
 
     scrollbar = Scrollbar(content_frame, orient="vertical", command=tree.yview)
@@ -113,13 +118,19 @@ def wyswietl_obecnych_wiezniow():
 def wyswietl_bylych_wiezniow():
     global tree  
 
-    clear_treeview()  # Usunięcie starego Treeview
+    clear_treeview()  
 
-    tree = ttk.Treeview(content_frame, columns=("ID", "Imie", "Nazwisko", "Stanowisko"), show="headings")
+    tree = ttk.Treeview(content_frame, columns=("ID", "Imie", "Nazwisko", "Pseudonim", "Id_przestepstwa", "Data_przybycia", "Wyrok", "Gang", "Id_celi", "Id_stolowki", "Data_wyjscia"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("Imie", text="Imie")
-    tree.heading("Nazwisko", text="Nazwisko")
-    tree.heading("Stanowisko", text="Stanowisko")
+    tree.heading("Pseudonim", text="Pseudonim")
+    tree.heading("Id_przestepstwa", text="Id_przestepstwa")
+    tree.heading("Data_przybycia", text="Data_przybycia")
+    tree.heading("Wyrok", text="Wyrok")
+    tree.heading("Gang", text="Gang")
+    tree.heading("Id_celi", text="Id_celi")
+    tree.heading("Id_stolowki", text="Id_stolowki")
+    tree.heading("Data_wyjscia", text="Data_wyjscia")
     tree.pack(side=RIGHT, fill=BOTH, expand=True)
 
     scrollbar = Scrollbar(content_frame, orient="vertical", command=tree.yview)
@@ -145,13 +156,19 @@ def szukaj_wieznia():
 
     global tree  
 
-    clear_treeview()  # Usunięcie starego Treeview
+    clear_treeview() 
 
-    tree = ttk.Treeview(content_frame, columns=("ID", "Imie", "Nazwisko", "Stanowisko"), show="headings")
+    tree = ttk.Treeview(content_frame, columns=("ID", "Imie", "Nazwisko", "Pseudonim", "Id_przestepstwa", "Data_przybycia", "Wyrok", "Gang", "Id_celi", "Id_stolowki", "Data_wyjscia"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("Imie", text="Imie")
-    tree.heading("Nazwisko", text="Nazwisko")
-    tree.heading("Stanowisko", text="Stanowisko")
+    tree.heading("Pseudonim", text="Pseudonim")
+    tree.heading("Id_przestepstwa", text="Id_przestepstwa")
+    tree.heading("Data_przybycia", text="Data_przybycia")
+    tree.heading("Wyrok", text="Wyrok")
+    tree.heading("Gang", text="Gang")
+    tree.heading("Id_celi", text="Id_celi")
+    tree.heading("Id_stolowki", text="Id_stolowki")
+    tree.heading("Data_wyjscia", text="Data_wyjscia")
     tree.pack(side=RIGHT, fill=BOTH, expand=True)
 
     scrollbar = Scrollbar(content_frame, orient="vertical", command=tree.yview)
@@ -208,9 +225,6 @@ def zmien_cela():
     conn.close()
     wyswietl_obecnych_wiezniow()  
     
-    
-
-# GUI Setup
 
 def pokaz_wiezniow():
     clear_content()
@@ -233,7 +247,6 @@ def pokaz_wiezniow():
     Button(my_frame, text="Wyświetl obecnych", command=wyswietl_obecnych_wiezniow).grid(row=11, column=0, pady=10, padx=10)
     Button(my_frame, text="Wyświetl byłych", command=wyswietl_bylych_wiezniow).grid(row=11, column=1, pady=10, padx=10)
 
-    # Sekcja wyszukiwania więźnia
     search_frame = LabelFrame(content_frame, text="Szukaj więźnia")
     search_frame.pack(pady=10)
 
@@ -244,7 +257,6 @@ def pokaz_wiezniow():
     search_entry.pack(side=LEFT, padx=5)
     Button(search_frame, text="Szukaj", command=szukaj_wieznia).pack(side=LEFT, padx=5)
 
-    # Sekcja zmiany daty wyjścia
     release_frame = LabelFrame(content_frame, text="Zmień datę wyjścia")
     release_frame.pack(pady=10)
 
@@ -253,7 +265,6 @@ def pokaz_wiezniow():
     release_entry.pack(side=LEFT, padx=5)
     Button(release_frame, text="Wypuść więźnia", command=wypusc_wieznia).pack(pady=10, padx=10)
 
-    # Sekcja zmiany celi
     cell_frame = LabelFrame(content_frame, text="Zmień celę więźnia")
     cell_frame.pack(pady=10)
 
@@ -267,7 +278,6 @@ def pokaz_wiezniow():
 
     Button(cell_frame, text="Zmień celę", command=zmien_cela).pack(side=LEFT, padx=5)
 
-    # Tworzymy etykietę wyników globalnie
     result_label = Label(content_frame, text="")
     result_label.pack()
 
@@ -297,9 +307,6 @@ def wypusc_wieznia():
         log_error(e, "wypusc_wieznia")
         result_label.config(text="Błąd przy zwalnianiu więźnia!", fg="red")
 
-
-
-
     
 def pokaz_pracownikow():
     clear_content()
@@ -308,7 +315,6 @@ def pokaz_pracownikow():
     global tree
     tree = ttk.Treeview(content_frame, columns=("Stanowisko", "ID", "Id_odbiorcy", "imie", "nazwisko", "id_placowki", "wyplata"), show="headings")
 
-    # Definiowanie nagłówków kolumn
     col_names = ["Stanowisko", "ID", "Id_odbiorcy", "Imię", "Nazwisko", "Id placówki", "Wypłata"]
     for col, name in zip(("Stanowisko", "ID", "Id_odbiorcy", "imie", "nazwisko", "id_placowki", "wyplata"), col_names):
         tree.heading(col, text=name)
@@ -316,7 +322,6 @@ def pokaz_pracownikow():
 
     tree.pack(side=TOP, fill=BOTH, expand=True)
 
-    # Pasek przewijania
     scrollbar = Scrollbar(content_frame, orient="vertical", command=tree.yview)
     scrollbar.pack(side=RIGHT, fill=Y)
     tree.configure(yscrollcommand=scrollbar.set)
@@ -334,51 +339,9 @@ def pokaz_pracownikow():
     except Exception as e:
         log_error(e, "pokaz_pracownikow")
         
-def dodaj_pracownika(typ):
-    try:
-        conn = connect_db()
-        cursor = conn.cursor()
-        if typ == "straznik":
-            sql = '''INSERT INTO straznicy (imie, nazwisko, id_placowki, wyplata) VALUES (%s, %s, %s, %s)'''
-            values = (entries["Imie"].get(), entries["Nazwisko"].get(), entries["Id placowki"].get(), entries["Wyplata"].get())
-        else:
-            sql = '''INSERT INTO pozostali_pracownicy (imie, nazwisko, id_placowki, wyplata) VALUES (%s, %s, %s, %s)'''
-            values = (entries["Imie"].get(), entries["Nazwisko"].get(), entries["Id placowki"].get(), entries["Wyplata"].get())
-
-        cursor.execute(sql, values)
-        conn.commit()
-        conn.close()
-        result_label.config(text=f"Pracownik dodany do {typ}!")
-        if typ == "straznik":
-            pokaz_straznicy()
-        else:
-            pokaz_pozostali_pracownicy()
-    except Exception as e:
-        log_error(e, f"dodaj_pracownika({typ})")
-        result_label.config(text="Błąd przy dodawaniu pracownika!")
-        
-def show_pracownicy_controls():
-    global delete_entry, salary_entry, new_salary_entry, result_label  # Dodanie globalnej etykiety
-
-    Label(content_frame, text="ID pracownika do usunięcia:").pack()
-    delete_entry = Entry(content_frame)
-    delete_entry.pack()
-    Button(content_frame, text="Usuń Pracownika", command=lambda: usun_pracownika("straznik")).pack()
-
-    Label(content_frame, text="ID pracownika do zmiany wypłaty:").pack()
-    salary_entry = Entry(content_frame)
-    salary_entry.pack()
-    Label(content_frame, text="Nowa wypłata:").pack()
-    new_salary_entry = Entry(content_frame)
-    new_salary_entry.pack()
-    Button(content_frame, text="Zmień Wypłatę", command=lambda: zmien_wyplate("straznik")).pack()
-
-    # **Tutaj dodajemy result_label**
-    result_label = Label(content_frame, text="", fg="red")
-    result_label.pack()
 
 
-def usun_pracownika(typ):
+def usun_pracownika(typ, id_odbiorcy):
     id_odbiorcy = delete_entry.get().strip()
     if not id_odbiorcy:
         result_label.config(text="Podaj ID odbiorcy!")
@@ -401,10 +364,30 @@ def usun_pracownika(typ):
         log_error(e, f"usun_pracownika({typ})")
         result_label.config(text="Błąd przy usuwaniu pracownika!", fg="red")
 
+def get_pracownik_type(id_odbiorcy):
+    try:
+        conn = connect_db()
+        cursor = conn.cursor()
 
-def zmien_wyplate(typ):
-    id_odbiorcy = salary_entry.get().strip()
-    nowa_wyplata = new_salary_entry.get().strip()
+        cursor.execute("SELECT COUNT(*) FROM straznicy WHERE id_odbiorcy = %s", (id_odbiorcy,))
+        if cursor.fetchone()[0] > 0:
+            conn.close()
+            return "straznik"
+
+        cursor.execute("SELECT COUNT(*) FROM pozostali_pracownicy WHERE id_odbiorcy = %s", (id_odbiorcy,))
+        if cursor.fetchone()[0] > 0:
+            conn.close()
+            return "pozostali"
+
+        conn.close()
+        return None  
+
+    except Exception as e:
+        log_error(e, "get_pracownik_type")
+        return None
+
+
+def zmien_wyplate(typ, id_odbiorcy, nowa_wyplata):
     if not id_odbiorcy or not nowa_wyplata:
         result_label.config(text="Podaj ID odbiorcy i nową wypłatę!")
         return
@@ -412,47 +395,47 @@ def zmien_wyplate(typ):
     try:
         conn = connect_db()
         cursor = conn.cursor()
+
         if typ == "straznik":
             sql = "UPDATE straznicy SET wyplata = %s WHERE id_odbiorcy = %s"
         else:
             sql = "UPDATE pozostali_pracownicy SET wyplata = %s WHERE id_odbiorcy = %s"
+
         cursor.execute(sql, (nowa_wyplata, id_odbiorcy))
         conn.commit()
         conn.close()
 
         result_label.config(text=f"Wypłata zmieniona dla pracownika {id_odbiorcy}.", fg="green")
-        pokaz_pracownikow()
+        pokaz_pracownikow()  
     except Exception as e:
         log_error(e, f"zmien_wyplate({typ})")
         result_label.config(text="Błąd przy zmianie wypłaty!", fg="red")
 
 
 def show_pracownicy_controls():
-    global delete_entry, salary_entry, new_salary_entry, result_label  # Dodanie globalnej etykiety
+    global delete_entry, salary_entry, new_salary_entry, result_label  
 
-    Label(content_frame, text="ID pracownika do usunięcia:").pack()
+    Label(content_frame, text="ID odbiorcy do usunięcia:").pack()
     delete_entry = Entry(content_frame)
     delete_entry.pack()
-    Button(content_frame, text="Usuń Pracownika", command=lambda: usun_pracownika("straznik")).pack()
+    Button(content_frame, text="Usuń Pracownika", command=lambda: usun_pracownika(get_pracownik_type(delete_entry.get().strip()), delete_entry.get().strip())).pack()
 
-    Label(content_frame, text="ID pracownika do zmiany wypłaty:").pack()
+    Label(content_frame, text="ID odbiorcy do zmiany wypłaty:").pack()
     salary_entry = Entry(content_frame)
     salary_entry.pack()
     Label(content_frame, text="Nowa wypłata:").pack()
     new_salary_entry = Entry(content_frame)
     new_salary_entry.pack()
-    Button(content_frame, text="Zmień Wypłatę", command=lambda: zmien_wyplate("straznik")).pack()
+    Button(content_frame, text="Zmień Wypłatę", command=lambda: zmien_wyplate(get_pracownik_type(salary_entry.get().strip()), salary_entry.get().strip(), new_salary_entry.get().strip())).pack()
 
-    # **Tutaj dodajemy result_label**
+
     result_label = Label(content_frame, text="", fg="red")
     result_label.pack()
-
-
         
 def pokaz_zmiany():
     clear_content()
     
-    global tree  # Re-declare tree so it can be reused globally
+    global tree 
     tree = ttk.Treeview(content_frame, columns=("ID", "id_sektor", "id_zmiany", "Stan"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("id_sektor", text="Id_sektor")
@@ -467,7 +450,7 @@ def pokaz_zmiany():
     try:
         conn = connect_db()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM zmiany_braki")  # Ensure correct column names
+        cursor.execute("SELECT * FROM zmiany_braki")  
         records = cursor.fetchall()
         conn.close()
         
@@ -481,7 +464,7 @@ def pokaz_zmiany():
 def pokaz_finanse():
     clear_content()
     
-    global tree  # Re-declare tree so it can be reused globally
+    global tree 
     tree = ttk.Treeview(content_frame, columns=("ID", "kwota", "data_transakcji", "id_odbiorcy", "rodzaj_odbiorcy", "nazwa_podmiotu"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("kwota", text="kwota")
@@ -498,7 +481,7 @@ def pokaz_finanse():
     try:
         conn = connect_db()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM wydatki")  # Ensure correct column names
+        cursor.execute("SELECT * FROM wydatki") 
         records = cursor.fetchall()
         conn.close()
         
@@ -512,7 +495,7 @@ def pokaz_finanse():
 def pokaz_przestepstwa():
     clear_content()
     
-    global tree  # Re-declare tree so it can be reused globally
+    global tree 
     tree = ttk.Treeview(content_frame, columns=("ID", "wykroczenie", "stopien_zagrozenia"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("wykroczenie", text="wykroczenie")
@@ -526,7 +509,7 @@ def pokaz_przestepstwa():
     try:
         conn = connect_db()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM przestepstwa")  # Ensure correct column names
+        cursor.execute("SELECT * FROM przestepstwa") 
         records = cursor.fetchall()
         conn.close()
         
@@ -540,7 +523,7 @@ def pokaz_przestepstwa():
 def pokaz_cele():
     clear_content()
     
-    global tree  # Re-declare tree so it can be reused globally
+    global tree 
     tree = ttk.Treeview(content_frame, columns=("ID", "Id_placowki", "Wypelnienie", "Pojemnosc", "Id_straznika"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("Id_placowki", text="Id_placowki")
@@ -556,7 +539,7 @@ def pokaz_cele():
     try:
         conn = connect_db()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM oblozenie_cele")  # Ensure correct column names
+        cursor.execute("SELECT * FROM oblozenie_cele")
         records = cursor.fetchall()
         conn.close()
         
@@ -568,7 +551,7 @@ def pokaz_cele():
         
 def pokaz_stolowki():
     clear_content()
-    global tree  # Re-declare tree so it can be reused globally
+    global tree
     tree = ttk.Treeview(content_frame, columns=("ID", "Id_placowki", "Wypelnienie", "Pojemnosc", "Id_straznika"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("Id_placowki", text="Id_placowki")
@@ -584,7 +567,7 @@ def pokaz_stolowki():
     try:
         conn = connect_db()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM oblozenie_stolowki")  # Ensure correct column names
+        cursor.execute("SELECT * FROM oblozenie_stolowki")
         records = cursor.fetchall()
         conn.close()
         
@@ -598,15 +581,14 @@ def pokaz_stolowki():
 def pokaz_placowki():
     clear_content()
 
-    global tree  # Re-declare tree so it can be reused globally
+    global tree  
     tree = ttk.Treeview(content_frame, columns=("ID", "nazwa", "miasto", "ulica", "nr_budynku"), show="headings")
 
-    # Add missing heading
     tree.heading("ID", text="ID")
     tree.heading("nazwa", text="nazwa")
     tree.heading("miasto", text="miasto")
     tree.heading("ulica", text="ulica")
-    tree.heading("nr_budynku", text="nr_budynku")  # Missing heading added
+    tree.heading("nr_budynku", text="nr_budynku")
 
     tree.pack(side=RIGHT, fill=BOTH, expand=True)
 
@@ -617,11 +599,10 @@ def pokaz_placowki():
     try:
         conn = connect_db()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM placowki")  # Ensure correct column names
+        cursor.execute("SELECT * FROM placowki") 
         records = cursor.fetchall()
         conn.close()
 
-        # Insert records into the Treeview
         for row in records:
             tree.insert("", "end", values=row)
 
@@ -632,7 +613,7 @@ def pokaz_placowki():
 def pokaz_magazyny():
     clear_content()
     
-    global tree  # Re-declare tree so it can be reused globally
+    global tree  
     tree = ttk.Treeview(content_frame, columns=("ID", "Id_placowki", "zapelnienie", "pojemnosc"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("Id_placowki", text="Id_placowki")
@@ -647,7 +628,7 @@ def pokaz_magazyny():
     try:
         conn = connect_db()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM oblozenie_magazynu")  # Ensure correct column names
+        cursor.execute("SELECT * FROM oblozenie_magazynu")  
         records = cursor.fetchall()
         conn.close()
         
@@ -659,7 +640,7 @@ def pokaz_magazyny():
         
 def pokaz_produkty():
     clear_content()
-    global tree2  # Re-declare tree so it can be reused globally
+    global tree2 
     tree2 = ttk.Treeview(content_frame, columns=("ID", "typ", "cena"), show="headings")
     tree2.heading("ID", text="ID")
     tree2.heading("typ", text="typ")
@@ -673,7 +654,7 @@ def pokaz_produkty():
     try:
         conn = connect_db()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM produkty")  # Ensure correct column names
+        cursor.execute("SELECT * FROM produkty") 
         records = cursor.fetchall()
         conn.close()
         
@@ -682,84 +663,6 @@ def pokaz_produkty():
     except Exception as e:
         log_error(e, "pokaz_pracownikow")
 
-def zrob_zakupy():
-    clear_content()
-    show_zakupy_controls()
-
-    global tree
-    tree = ttk.Treeview(content_frame, columns=("id_produktu", "typ_produktu", "cena_produktu"), show="headings")
-
-    # Definiowanie nagłówków kolumn
-    col_names = ["Id produktu", "Typ produktu", "Cena"]
-    for col, name in zip(("id_produktu", "typ_produktu", "cena_produktu"), col_names):
-        tree.heading(col, text=name)
-        tree.column(col, anchor="center", width=100)
-
-    tree.pack(side=TOP, fill=BOTH, expand=True)
-
-    try:
-        conn = connect_db()
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM produkty")  
-        records = cursor.fetchall()
-        conn.close()
-
-        for row in records:
-            tree.insert("", "end", values=row)
-
-    except Exception as e:
-        log_error(e, "zrob_zakupy")
-
-def show_zakupy_controls():
-    global idp_entry, amt_entry, idm_entry, result_label
-    
-    Label(content_frame, text="Id produktu:").pack()
-    idp_entry = Entry(content_frame)
-    idp_entry.pack()
-    
-    Label(content_frame, text="Ilość:").pack()
-    amt_entry = Entry(content_frame)
-    amt_entry.pack()
-    
-    Label(content_frame, text="Id magazynu:").pack()
-    idm_entry = Entry(content_frame)
-    idm_entry.pack()
-    
-    Button(content_frame, text="Zrób zakupy", command=lambda: zakup()).pack()
-    
-    result_label = Label(content_frame, text="", fg="red")
-    result_label.pack()
-
-def zakup():
-    
-    idp = idp_entry.get().strip()
-    if not idp:
-        result_label.config(text="Podaj id produktu!")
-
-    amt = amt_entry.get().strip()
-    if not amt:
-        result_label.config(text="Podaj ilość produktu!")
-
-    idm = idm_entry.get().strip()
-    if not idm:
-        result_label.config(text="Podaj id magazynu!")
-
-    try:
-        conn = connect_db()
-        cursor = conn.cursor()
-        sql = "SELECT uzupelnij(%s, %s, %s)"
-        cursor.execute(sql, (idp, amt, idm))
-        conn.commit()
-        conn.close()
-
-        result_label.config(text=f"Zrobiono zakupy", fg="green")
-
-    except Exception as e:
-        log_error(e, 'zakup')
-        result_label.config(text="Błąd przy robieniu zakupów!", fg="red")
-
-
-# Sidebar menu
 side_menu = Frame(root, width=200, bg='gray')
 side_menu.pack(side=LEFT, fill=Y)
 
@@ -773,13 +676,10 @@ Button(side_menu, text="Stolowki (w)", command=pokaz_stolowki).pack(pady=5)
 Button(side_menu, text="Cele (w)", command=pokaz_cele).pack(pady=5)
 Button(side_menu, text="Finanse (w)", command=pokaz_finanse).pack(pady=5)
 Button(side_menu, text="Zmiany Strażników (w)", command=pokaz_zmiany).pack(pady=5)
-Button(side_menu, text="Zrób zakupy", command=zrob_zakupy).pack(pady=5)
 
-    # Content frame
 content_frame = Frame(root)
 content_frame.pack(side=RIGHT, expand=True, fill=BOTH)
 
-# Prisoner list table
 tree = ttk.Treeview(content_frame, columns=("ID", "Imie", "Nazwisko", "Wyrok", "Zdjęcie"), show="headings")
 tree.heading("ID", text="ID")
 tree.heading("Imie", text="Imie")
@@ -791,8 +691,6 @@ tree.pack(side=RIGHT, fill=BOTH, expand=True)
 scrollbar = Scrollbar(content_frame, orient="vertical", command=tree.yview)
 scrollbar.pack(side=RIGHT, fill=Y)
 tree.configure(yscrollcommand=scrollbar.set)
-
-
 
 
 root.mainloop()
