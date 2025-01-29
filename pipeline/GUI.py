@@ -427,7 +427,7 @@ def pokaz_zmiany():
     clear_content()
     
     global tree  # Re-declare tree so it can be reused globally
-    tree = ttk.Treeview(content_frame, columns=("ID", "Id_sektor", "Id_zmiany", "Stan"), show="headings")
+    tree = ttk.Treeview(content_frame, columns=("ID", "id_sektor", "id_zmiany", "Stan"), show="headings")
     tree.heading("ID", text="ID")
     tree.heading("id_sektor", text="Id_sektor")
     tree.heading("id_zmiany", text="Id_zmiany")
@@ -553,7 +553,7 @@ def pokaz_stolowki():
     
     scrollbar = Scrollbar(content_frame, orient="vertical", command=tree2.yview)
     scrollbar.pack(side=RIGHT, fill=Y)
-    tree2.configure(yscrollcommand=scrollbar.set)
+    tree.configure(yscrollcommand=scrollbar.set)
     
     try:
         conn = connect_db()
@@ -652,7 +652,7 @@ def pokaz_produkty():
         conn.close()
         
         for row in records:
-            tree.insert("", "end", values=row)
+            tree2.insert("", "end", values=row)
     except Exception as e:
         log_error(e, "pokaz_pracownikow")
 
