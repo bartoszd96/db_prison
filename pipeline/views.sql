@@ -60,7 +60,7 @@ SELECT
     COUNT(z.id_produktu) OVER (PARTITION BY m.id_magazynu) AS zapelnienie_magazynu,
     m.pojemnosc_magazynu
 FROM magazyny m
-LEFT JOIN zaopatrzenie z ON z.id_magazynu = m.id_magazynu;
+LEFT JOIN zaopatrzenie z ON m.id_magazynu = z.id_magazynu;
 
 
 CREATE OR REPLACE VIEW zmiany_braki AS
