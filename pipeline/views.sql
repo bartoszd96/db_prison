@@ -57,10 +57,10 @@ CREATE VIEW oblozenie_magazynu AS
 SELECT 
     m.id_magazynu, 
     m.id_placowki,
-    COUNT(z.id_produktu) OVER (PARTITION BY m.id_magazynu) AS zapelnienie_magazynu,
+    n.obecny_stan, --OVER (PARTITION BY m.id_magazynu) AS zapelnienie_magazynu,
     m.pojemnosc_magazynu
 FROM magazyny m
-LEFT JOIN zaopatrzenie z ON m.id_magazynu = z.id_magazynu;
+LEFT JOIN (select z.id_magazynu, sum(z.obecny_stan) as obecny_stan from zaopatrzenie z group by id_magazynu) n ON n.id_magazynu = m.id_magazynu;
 
 
 CREATE OR REPLACE VIEW zmiany_braki AS
