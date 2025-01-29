@@ -101,7 +101,7 @@ CREATE TABLE ZAOPATRZENIE (
     id_produktu INTEGER NOT NULL REFERENCES PRODUKTY(id_produktu),
     id_magazynu INTEGER NOT NULL REFERENCES MAGAZYNY(id_magazynu),
     obecny_stan INTEGER NOT NULL,
-    PRIMARY KEY (id_produktu, id_sali)
+    PRIMARY KEY (id_produktu, id_magazynu)
 );
 
 CREATE TABLE KONTRAHENCI (
