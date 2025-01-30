@@ -40,6 +40,7 @@ BEGIN
 END
 $$ LANGUAGE 'plpgsql';
 
+
 CREATE OR REPLACE FUNCTION UZUPELNIJ(id_p INTEGER, amt INTEGER, id_m INTEGER)
 RETURNS VOID AS $$
 DECLARE
@@ -49,6 +50,7 @@ DECLARE
 	curr_cap INTEGER;
 	id_o INTEGER;
 	cena INTEGER;
+	record_check INTEGER;
 BEGIN
 
 SELECT ARRAY(SELECT p.id_produktu FROM produkty p) INTO ids_p;
@@ -74,7 +76,13 @@ IF curr_cap < curr_amt + amt THEN
 	RAISE EXCEPTION 'Nie możesz tyle zamówić, nie starczy miejsca w magazynie';
 END IF;
 
-UPDATE zaopatrzenie SET obecny_stan = obecny_stan + amt WHERE id_produktu=id_p;
+SELECT count(z.id_produktu) INTO record_check FROM zaopatrzenie z WHERE (z.id_produktu = id_p) and (z.id_magazynu = id_m);
+
+IF record_check = 0 THEN
+	INSERT INTO zaopatrzenie(id_produktu, id_magazynu, obecny_stan) VALUES(id_p, id_m, amt);
+ELSE
+	UPDATE zaopatrzenie SET obecny_stan = obecny_stan + amt WHERE (id_produktu=id_p) and (id_magazynu = id_m);
+END IF;
 
 SELECT k.id_odbiorcy INTO id_o FROM kontrahenci k WHERE k.id_produktu = id_p;
 SELECT p.cena_produktu into cena FROM produkty p WHERE p.id_produktu = id_p;
