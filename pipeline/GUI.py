@@ -1,8 +1,3 @@
-'''2. przypisywanie do zmian trzeba gdzieś dać
-3.  zrobienie wyplat/zakup produktu 
-5. zdjecia?'''
-
-
 import psycopg2
 from tkinter import *
 from tkinter import ttk
