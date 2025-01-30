@@ -64,8 +64,37 @@ LEFT JOIN (select z.id_magazynu, sum(z.obecny_stan) as obecny_stan from zaopatrz
 
 
 CREATE OR REPLACE VIEW zmiany_braki AS
-SELECT a.id_placowki, a.id_sektor, a.id_zmiany, 'Brak strażnika na zmianie' as Braki FROM (SELECT * FROM sektory s CROSS JOIN (SELECT 1 AS id_zmiany UNION ALL SELECT 2 UNION ALL SELECT 3)) a LEFT OUTER JOIN 
-zmiany b ON a.id_sektor = b.id_sektor and a.id_zmiany = b.id_zmiany where (b.id_zmiany is null) or (b.id_straznika is null);
+SELECT a.id_placowki, a.id_sektor, a.id_zmiany, 'Brak straznika na zmianie' as Straznicy FROM (SELECT * FROM sektory s CROSS JOIN (SELECT 1 AS id_zmiany UNION ALL SELECT 2 UNION ALL SELECT 3)) a LEFT OUTER JOIN 
+zmiany b ON a.id_sektor = b.id_sektor and a.id_zmiany = b.id_zmiany where (b.id_zmiany is null) or (b.id_straznika is null)
+UNION
+SELECT a.id_placowki, a.id_sektor, a.id_zmiany, b.id_straznika as Straznicy FROM (SELECT * FROM sektory s CROSS JOIN (SELECT 1 AS id_zmiany UNION ALL SELECT 2 UNION ALL SELECT 3)) a LEFT OUTER JOIN 
+zmiany b ON a.id_sektor = b.id_sektor and a.id_zmiany = b.id_zmiany where (b.id_zmiany is null) or (b.id_straznika is not null);
+
+CREATE OR REPLACE VIEW zmiany_braki AS 
+SELECT 
+    a.id_placowki, 
+    a.id_sektor, 
+    a.id_zmiany, 
+    'Brak straznika na zmianie' AS Straznicy 
+FROM 
+    (SELECT * FROM sektory s CROSS JOIN (SELECT 1 AS id_zmiany UNION ALL SELECT 2 UNION ALL SELECT 3)) a 
+LEFT OUTER JOIN zmiany b 
+ON a.id_sektor = b.id_sektor AND a.id_zmiany = b.id_zmiany 
+WHERE b.id_straznika IS NULL
+
+UNION
+
+SELECT 
+    a.id_placowki, 
+    a.id_sektor, 
+    a.id_zmiany, 
+    CAST(b.id_straznika AS TEXT) AS Straznicy 
+FROM 
+    (SELECT * FROM sektory s CROSS JOIN (SELECT 1 AS id_zmiany UNION ALL SELECT 2 UNION ALL SELECT 3)) a 
+LEFT OUTER JOIN zmiany b 
+ON a.id_sektor = b.id_sektor AND a.id_zmiany = b.id_zmiany 
+WHERE b.id_straznika IS NOT NULL;
+
 
 
 CREATE VIEW lista_pracownikow AS
